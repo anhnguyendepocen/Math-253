@@ -1,0 +1,24 @@
+---
+title: "Working Outline"
+author: "Daniel Kaplan"
+date: "November 3, 2014"
+output: html_document
+---
+
+i. Data & Graphics
+#. Modeling
+#. Tools
+    a. regex
+    #. approximate string matching
+        #. <http://journal.r-project.org/archive/2014-1/loo.pdf>
+        #. [SOUNDEX](http://en.wikipedia.org/wiki/Soundex)
+#. Machine Learning
+    a. The classics: linear and logistic regression
+    #. modern machine learning
+#. Text and Natural Language Processing
+    a. Package for approximate string matching: 
+    #. See <http://www.jstor.org.ezproxy.macalester.edu/stable/2289924?seq=1&>
+#. Algorithms
+    a. Linear Algebra and QR
+    #. EM
+    #. Clustering
