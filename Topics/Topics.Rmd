@@ -1,0 +1,30 @@
+
+## Before class meets
+
+1. Install RStudio and R
+#. `devtools::install_github("dtkaplan/stat253")`
+#. Read chapter 1 of *An Introduction to Statistical Learning* (ISL)
+#. Create a Discus account [NEED LINK HERE]
+#. How to hand in papers
+    * Where?
+        * Dropbox (but doesn't work on server)
+        * Google drive (like Dropbox)
+        * RPubs (but too crowded on screen)
+        * FTP to individual accounts
+    * Template in `stat253` package
+    * Select a shorthand name that's unique in the class.  You can edit the spreadsheet here: LINK TO GOOGLE SPREADSHEET with student names and initials.  In handing in assignments, this unique shorthand name will be referred to as `[ID]`.  Your file names should be **exactly** as specified: no blanks, no capitalization, use dashes instead of underscores.
+    
+## Week 1
+
+1. Topics
+    * Overview of statistical learning.
+    * Getting started with R
+#. Reading: Chapter 2 of ISL
+#. Programming assignment: 
+    * create filename `[ID]-week-2-programming.Rmd`
+    * Fill in the template with answers to Exercises 8 & 9 in ISL § 2.4.  Here's a trial submission for [ISL § 2.4 Exercise 10](../Assignments/ISL-2/example-week-2-programming.html).
+#. Theory assignment
+
+
+## Week 2
+

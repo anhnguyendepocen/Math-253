@@ -1,0 +1,23 @@
+---
+title: "Ideas for Statistical Computing and Machine Learning"
+author: "Daniel Kaplan"
+date: "December 7, 2014"
+output: html_document
+---
+
+A book with three chapters that relate nicely to STAT 253.
+
+Objects: Use Hadley's example from install_github("hadley/rv2") --- various functions for working with discrete random variables.
+
+* [rvest](https://github.com/hadley/rvest) for data scraping ???
+
+## Federalist Papers
+
+See <https://github.com/rudeboybert/Federalist> where they look at a set of key words and the odds ratio of using them by Hamilton compared to Jay and Madison.
+
+Could be two projects, maybe done in reverse order from the web site:
+
+* Word counting and odds ratios
+* Identification of important words.
+
+

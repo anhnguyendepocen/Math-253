@@ -1,0 +1,34 @@
+---
+title: "Basics of R"
+author: "Danny Kaplan"
+date: "June 10, 2015"
+output: html_document
+---
+
+The *ISL* book adopts a style of programming that is not as concise as desired.
+
+## Kinds of Objects in R
+
+1. Data tables (a.k.a. data frames)
+2. variables
+3. vectors
+4. functions
+5. arguments
+6. scalars & constants
+7. formulas
+
+How to identify each of them.
+
+## Plotting systems
+
+There are three widely used plotting systems in R: base graphics, lattice graphics, `ggplot2` graphics.  We're going to be using some of all three.  It's not that they do different things. But you will see materials written in all three and each of the three involves a distinct programming style. 
+
+How to spot base graphics.  Adding layers
+
+How to spot lattice.  Hard to add layers
+
+
+
+## Attach
+
+In *ISL* they use the `attach()` function.  **Never** use `attach()`.  If you are using `attach()`, something is wrong and you can find a better way.
