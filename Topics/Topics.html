@@ -91,16 +91,87 @@ img {
 <li>Getting started with R</li>
 </ul></li>
 <li>Reading: Chapter 2 of ISL</li>
+<li>Discussion questions: ISL 2.4.1, 2.4.3, 2.4.6</li>
 <li>Programming assignment:
 <ul>
 <li>create filename <code>[ID]-week-2-programming.Rmd</code></li>
-<li>Fill in the template with answers to Exercises 8 &amp; 9 in ISL § 2.4. Here’s a trial submission for <a href="../Assignments/ISL-2/dtk-week-2-programming.html">ISL § 2.4 Exercise 10</a>.</li>
+<li>Fill in the template with answers to Exercises 8 &amp; 9 in ISL § 2.4. Here’s a trial submission for <a href="../Assignments/ISL-2/example-week-2-programming.html">ISL § 2.4 Exercise 10</a>.</li>
 </ul></li>
-<li>Theory assignment</li>
+<li>Theory assignment: ISL 2.4.2, 2.4.7. Create <code>[ID]-theory.Rmd</code>.</li>
 </ol>
 </div>
 <div id="week-2" class="section level2">
 <h2>Week 2</h2>
+<ol style="list-style-type: decimal">
+<li>Topic: Linear regression as statistical learning.</li>
+<li>Readings.
+<ul>
+<li>In Chapter 3 of ISL read §3.1 &amp; §3.2</li>
+<li>Read §3.6 as you work through the commands (see programming assignment)</li>
+</ul></li>
+<li>Programming assignment:
+<ul>
+<li>(for first day) Fill in the template simply by working through §3.6. (Style imperative: <strong>Never</strong> use attach.) Hand in file <code>[ID]-week-3-programming.Rmd</code>.</li>
+<li>Add a new level-1 header to <code>[ID]-week-3-programming.Rmd</code>. Do problem 13 in ISL §3.7 under that heading.</li>
+</ul></li>
+<li>Theory assignment.
+<ul>
+<li>Reading questions.
+<ol style="list-style-type: decimal">
+<li>On p. 66 the authors state, “This is clearly not true in Fig. 3.1” Explain why.</li>
+<li>On p. 77 the authors state, “In this case we cannot even fit the multiple regression models using least squares ….” Explain why.</li>
+</ol></li>
+<li>ISL §3.7, problems 3 and 4.<br />Add your answers to <code>[ID]-theory.Rmd</code> from Week 1. Put in appropriate headers to distinquish between weeks and the problems within a week. You’ll be adding your theory answers to this document for the rest of the semester.</li>
+</ul></li>
+<li>Professor’s notes to self
+<ul>
+<li>Use §3.5 as an in-class programming task.</li>
+</ul></li>
+</ol>
+</div>
+<div id="week-3" class="section level2">
+<h2>Week 3</h2>
+<ol style="list-style-type: decimal">
+<li>Topics: Likelihood and simulation</li>
+<li>Readings (get these from internet)</li>
+<li>Professor’s notes to self
+<ul>
+<li>In class: work through problem 13 from ISL §3.7</li>
+<li>Writing likelihood functions.
+<ul>
+<li>log likelihood</li>
+<li>nonlinear optimization</li>
+<li>graph the likelihood function near the optimum</li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+<div id="week-n.-graphics" class="section level2">
+<h2>Week n. Graphics?</h2>
+<p>Or spread it throughout the course?</p>
+</div>
+<div id="end-of-semester-programming-tasks" class="section level1">
+<h1>End of semester programming tasks</h1>
+<p>One for each student</p>
+<ol style="list-style-type: lower-alpha">
+<li>Implement forward selection described in ISL pp. 78-79</li>
+<li>Simulation. For small <span class="math">\(n\)</span>, which is the better estimate of the standard deviation of values <span class="math">\(x_i\)</span>
+<ul>
+<li><span class="math">\(\sqrt{{1 \over n} \sum_{i=1}^{n}( x_i - \hat{x})^2 )}\)</span><br /></li>
+<li><span class="math">\(\sqrt{{1 \over {n-1}} \sum_{i=1}^{n}( x_i - \hat{x})^2 )}\)</span></li>
+</ul>
+There is more than one way to define “better”. Use these two:
+<ol style="list-style-type: decimal">
+<li>Repeated over many trials, the estimates come close to the population <span class="math">\(\sigma\)</span>.</li>
+<li>The RMS difference from the population <span class="math">\(\sigma\)</span>, computed over many trials, is small.</li>
+</ol></li>
+<li>Using values generated from a uniform distribution, <code>runif(n, min=0, max=1)</code>, compute the likelihood function based on each of three different models.
+<ol style="list-style-type: decimal">
+<li>A normal distribution with parameters mean and sd.</li>
+<li>An exponential distribution with parameter <code>rate</code>.</li>
+<li>A uniform distribution with parameters <code>max</code> and <code>min</code>. Are the maximum likelihood estimates systematically different than <code>min=0</code> and <code>max=1</code>? (That is, is the maximum likelihood estimate biased?)</li>
+</ol></li>
+</ol>
 </div>
 
 

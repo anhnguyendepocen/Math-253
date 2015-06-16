@@ -20,11 +20,66 @@
     * Overview of statistical learning.
     * Getting started with R
 #. Reading: Chapter 2 of ISL
+#. Discussion questions: ISL 2.4.1, 2.4.3, 2.4.6 
 #. Programming assignment: 
     * create filename `[ID]-week-2-programming.Rmd`
     * Fill in the template with answers to Exercises 8 & 9 in ISL § 2.4.  Here's a trial submission for [ISL § 2.4 Exercise 10](../Assignments/ISL-2/example-week-2-programming.html).
-#. Theory assignment
+#. Theory assignment: ISL 2.4.2, 2.4.7.  Create `[ID]-theory.Rmd`.
 
 
 ## Week 2
+
+1. Topic: Linear regression as statistical learning.
+#. Readings. 
+    * In Chapter 3 of ISL read §3.1 & §3.2
+    * Read §3.6 as you work through the commands (see programming assignment)
+#. Programming assignment:
+    * (for first day) Fill in the template simply by working through §3.6. (Style imperative: **Never** use attach.) Hand in file `[ID]-week-3-programming.Rmd`.
+    * Add a new level-1 header to `[ID]-week-3-programming.Rmd`.  Do problem 13 in ISL §3.7 under that heading.
+#. Theory assignment. 
+    * Reading questions. 
+        1. On p. 66 the authors state, "This is clearly not true in Fig. 3.1"  Explain why.
+        2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
+    * ISL §3.7, problems 3 and 4.  
+    Add your answers to `[ID]-theory.Rmd` from Week 1. Put in appropriate headers to distinquish between weeks and the problems within a week.  You'll be adding your theory answers to this document for the rest of the semester.
+#. Professor's notes to self
+    * Use §3.5 as an in-class programming task.
+
+
+## Week 3
+
+1. Topics: Likelihood and simulation
+#. Readings (get these from internet)
+#. Professor's notes to self
+    * In class: work through problem 13 from ISL §3.7
+    * Writing likelihood functions.
+        * log likelihood
+        * nonlinear optimization
+        * graph the likelihood function near the optimum
+        
+        
+        
+## Week n. Graphics?
+
+Or spread it throughout the course?
+        
+        
+
+# End of semester programming tasks 
+
+One for each student
+
+a. Implement forward selection described in ISL pp. 78-79
+#. Simulation. For small $n$, which is the better estimate of the standard deviation of values $x_i$
+    * $\sqrt{{1 \over n} \sum_{i=1}^{n}( x_i - \hat{x})^2 )}$    
+    * $\sqrt{{1 \over {n-1}} \sum_{i=1}^{n}( x_i - \hat{x})^2 )}$    
+    
+    There is more than one way to define "better".  Use these two:    
+    1. Repeated over many trials, the estimates come close to the population $\sigma$.
+    2. The RMS difference from the population $\sigma$, computed over many trials, is small.
+#. Using values generated from a uniform distribution, `runif(n, min=0, max=1)`, compute the likelihood function based on each of three different models.
+    1. A normal distribution with parameters mean and sd.
+    2. An exponential distribution with parameter `rate`.
+    3. A uniform distribution with parameters `max` and `min`. Are the maximum likelihood estimates systematically different than `min=0` and `max=1`?  (That is, is the maximum likelihood estimate biased?)
+
 
