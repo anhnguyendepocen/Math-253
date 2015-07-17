@@ -41,7 +41,7 @@
         1. On p. 66 the authors state, "This is clearly not true in Fig. 3.1"  Explain why.
         2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
     * ISL §3.7, problems 3 and 4.  
-    Add your answers to `[ID]-theory.Rmd` from Week 1. Put in appropriate headers to distinquish between weeks and the problems within a week.  You'll be adding your theory answers to this document for the rest of the semester.
+    Add your answers to `[ID]-theory.Rmd` from Week 1. Put in appropriate headers to distinguish between weeks and the problems within a week.  You'll be adding your theory answers to this document for the rest of the semester.
 #. Professor's notes to self
     * Use §3.5 as an in-class programming task.
 
@@ -56,8 +56,20 @@
         * log likelihood
         * nonlinear optimization
         * graph the likelihood function near the optimum
-        
-        
+
+## Week 4
+
+1. Topic: Classification
+#. Readings: In Chapter 4 of ISL §4.1, §4.2, §4.3.1-3, §4.4.1-2, §4.5
+#. Programming Assignment: 4.7.11, 4.7.13, OR SOMETHING FROM §4.6????
+#. Theory assignment: 4.7.1, 4.7.8, 4.7.9, 
+
+## Week 5
+
+1. Topic: Cross-Validation and Bootstrapping
+#. Readings: In Chapter 5 of ISL §5.1, §5.2
+#. Programming Assignment: 5.3
+#. Theory assignment:
         
 ## Week n. Graphics?
 
