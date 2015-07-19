@@ -70,6 +70,12 @@
 #. Readings: In Chapter 5 of ISL §5.1, §5.2
 #. Programming Assignment: 5.3
 #. Theory assignment:
+
+## Week 6
+
+1. Topic: Selecting model terms
+#. Readings: in Chapter 6 of ISL §6.1, §6.2
+#. Programming Assignment: Implement algorithm 6.1
         
 ## Week n. Graphics?
 
