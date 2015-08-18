@@ -26,3 +26,7 @@ Text scraping from web sites: <http://datadrivensecurity.info/blog/posts/2015/Ju
 ## Spam Assassin challenge
 
 Data as individual emails in compressed files (easy to uncompress into directories of the individual email files) are at [SpamAssassin](https://spamassassin.apache.org/publiccorpus/)
+
+## Breast cancer diagnosis
+
+See [Paul Anderson take-home exam](https://www.dropbox.com/s/ph9w3xb2urdvqkv/Final%20Exam.pdf?dl=0)

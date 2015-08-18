@@ -1,38 +1,47 @@
+```{r include=FALSE}
+week_number <- 0
+```
+
 
 ## Before class meets
 
 1. Install RStudio and R
-#. `devtools::install_github("dtkaplan/stat253")`
+#. `devtools::install_github("DataComputing/DataComputing")`
 #. Read chapter 1 of *An Introduction to Statistical Learning* (ISL)
-#. Create a Discus account [NEED LINK HERE]
-#. How to hand in papers
-    * Where?
-        * Dropbox (but doesn't work on server)
-        * Google drive (like Dropbox)
-        * RPubs (but too crowded on screen)
-        * FTP to individual accounts
-    * Template in `stat253` package
-    * Select a shorthand name that's unique in the class.  You can edit the spreadsheet here: LINK TO GOOGLE SPREADSHEET with student names and initials.  In handing in assignments, this unique shorthand name will be referred to as `[ID]`.  Your file names should be **exactly** as specified: no blanks, no capitalization, use dashes instead of underscores.
+#. Work through a [tutorial on R](https://www.datacamp.com/courses/r-programming-with-swirl).
+    * Create an account on <DataCamp.com>.  It's free.
+    * When you want to take the tutorial, login to DataCamp and go to the link to the tutorial.
+    * Another tutorial on R is [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r)
     
-## Week 1
+## Week `r I(week_number <- week_number + 1)`
 
 1. Topics
     * Overview of statistical learning.
-    * Getting started with R
+    * Getting started with R, RStudio, and RMarkdown 
 #. Reading: Chapter 2 of ISL
+#. Programming basics 1: Names, classes, and objects
 #. Discussion questions: ISL 2.4.1, 2.4.3, 2.4.6 
 #. Programming assignment: 
     * create filename `[ID]-week-2-programming.Rmd`
     * Fill in the template with answers to Exercises 8 & 9 in ISL § 2.4.  Here's a trial submission for [ISL § 2.4 Exercise 10](../Assignments/ISL-2/example-week-2-programming.html).
 #. Theory assignment: ISL 2.4.2, 2.4.7.  Create `[ID]-theory.Rmd`.
 
+### Logistics
 
-## Week 2
+#. How to hand in papers
+    * Create a web site where you can post files. 
+    * Template in `DataComputing` package
+    * Select a shorthand name that's unique in the class.  Fill in [this spreadsheet](https://docs.google.com/spreadsheets/d/1uGlZ7yVUhwU4Tb6lURTsciiGX91jzWA_jdAwVumeUVY/edit?usp=sharing) with proper names and your shorthand ID. You'll also put the root address of your web server here.  In handing in assignments, this unique shorthand name will be referred to as `[ID]`.  Your file names should be **exactly** as specified: no blanks, no capitalization, use dashes instead of underscores.
+
+
+## Week `r I(week_number <- week_number + 1)`
 
 1. Topic: Linear regression as statistical learning.
 #. Readings. 
     * In Chapter 3 of ISL read §3.1 & §3.2
     * Read §3.6 as you work through the commands (see programming assignment)
+#. Programming basics 2: Writing functions
+#. Visualization: Base graphics, statistical plots
 #. Programming assignment:
     * (for first day) Fill in the template simply by working through §3.6. (Style imperative: **Never** use attach.) Hand in file `[ID]-week-3-programming.Rmd`.
     * Add a new level-1 header to `[ID]-week-3-programming.Rmd`.  Do problem 13 in ISL §3.7 under that heading.
@@ -46,10 +55,12 @@
     * Use §3.5 as an in-class programming task.
 
 
-## Week 3
+## Week `r I(week_number <- week_number + 1)`
 
 1. Topics: Likelihood and simulation
 #. Readings (get these from internet)
+#. Programming basics 3: Indexing
+#. Visualization: Base graphics: lines, polygons, ...
 #. Professor's notes to self
     * In class: work through problem 13 from ISL §3.7
     * Writing likelihood functions.
@@ -57,35 +68,65 @@
         * nonlinear optimization
         * graph the likelihood function near the optimum
 
-## Week 4
+## Week `r I(week_number <- week_number + 1)`
 
 1. Topic: Classification
 #. Readings: In Chapter 4 of ISL §4.1, §4.2, §4.3.1-3, §4.4.1-2, §4.5
+#. Programming basics 4: Conditionals
+#. Visualization: Grammar of graphics: glyphs and aesthetics
 #. Programming Assignment: 4.7.11, 4.7.13, OR SOMETHING FROM §4.6????
 #. Theory assignment: 4.7.1, 4.7.8, 4.7.9, 
 
-## Week 5
+## Week `r I(week_number <- week_number + 1)`
 
 1. Topic: Cross-Validation and Bootstrapping
 #. Readings: In Chapter 5 of ISL §5.1, §5.2
+#. Programming basics 5: Loops and accumulators
+#. Visualization: Grammar of graphics: layers
 #. Programming Assignment: 5.3
 #. Theory assignment:
 
-## Week 6
+## Week `r I(week_number <- week_number + 1)`
 
 1. Topic: Selecting model terms
 #. Readings: in Chapter 6 of ISL §6.1, §6.2
+#. Visualization: Graphics choices
+#. Programming basics 6: Functionals --- solving, integration, optimization
 #. Programming Assignment: Implement algorithm 6.1
         
-## Week n. Graphics?
+## Week `r I(week_number <- week_number + 1)`
 
-Or spread it throughout the course?
-        
-        
+1. Topic: Nonlinear regression
+#. Readings: Chapter 7 of ISL
+#. Visualization: Maps and shapefiles
+#. Programming Assignment: 7.9.11
+#. Theory assignment: in §7.9 problems 3, 4, and 5
 
-# End of semester programming tasks 
+## Week `r I(week_number <- week_number + 1)`
 
-One for each student
+1. Topic: Tree-based methods
+#. Readings: Chapter 8 of ISL
+#. Programming Assignment: 8.4.12
+#. Theory assignment: In §8.4 problems 1, 2, 3, 4, and 5
+
+## Week `r I(week_number <- week_number + 1)`
+
+1. Topic: Support vector machines
+#. Readings: Chapter 9 of ISL
+
+
+
+## Week `r I(week_number <- week_number + 1)`
+
+1. Topic: Unsupervised learning
+#. Readings: Chapter 10 of ISL
+
+
+# End of semester topics
+
+As time permits, and as interest dictates, we may spend some time on these topics: Data wrangling, Data scraping, Graphical user interfaces
+
+Also, in the last weeks we will work on small group projects.  Groups can choose from among the following topics/projects.
 
 a. Implement forward selection described in ISL pp. 78-79
 #. Simulation. For small $n$, which is the better estimate of the standard deviation of values $x_i$
@@ -99,5 +140,13 @@ a. Implement forward selection described in ISL pp. 78-79
     1. A normal distribution with parameters mean and sd.
     2. An exponential distribution with parameter `rate`.
     3. A uniform distribution with parameters `max` and `min`. Are the maximum likelihood estimates systematically different than `min=0` and `max=1`?  (That is, is the maximum likelihood estimate biased?)
+#. Fit a regression tree.  Then fit an lm within each region.  Package this up into a function with a `predict()` method.
+#. Assignment 8.4.12
+#. Pick a Kaggle problem
+    Here are ones I've already looked at.
+    * [Home insurance](https://www.kaggle.com/c/liberty-mutual-group-property-inspection-prediction/data?train.csv.zip)
+    * [Survival on the Titanic](https://www.kaggle.com/c/titanic/data)
+    * [Particle decay](https://www.kaggle.com/c/flavours-of-physics/data), suitable for someone interested in physics.
+
 
 
