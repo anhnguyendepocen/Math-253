@@ -1,0 +1,69 @@
+---
+title: "Style Faux Pas"
+author: "Statistical Computing & Maching Learning"
+date: "August 31, 2015"
+output: html_document
+---
+
+# It's not T
+
+The book sometimes uses a variable named `T` in a command like that on p.49:
+```{r eval=FALSE}
+Auto=read.csv("Auto.csv",header=T,na.strings="?")
+```
+
+You should not use `T` to mean `TRUE`.  `TRUE` is a keyword in R whose meaning can never change.  `T` is a garden-variety variable that might mean `TRUE` or might not.  Truth should be certain.  `TRUE` is, `T` isn't.
+
+Similarly, use `FALSE` and not `F`.
+
+Other ways in which the above command is a style faux pas.
+
+1. Use `<-` not `=` for assignment.    
+    There are two completely distinct operations in R.    
+    1. Assignment of a value to an object name.  Use `<-` for this, even though it's allowed by R to use `=`.
+    2. Identification of the name of an argument.  You must use `=` for this.
+2. Use spacing to help the reader (i.e. yourself).      
+    A couple of simple rules will get you far:
+    * Put a single space after a `,` but not before.
+    * Put a space on either side of `=` and `<-`.
+    
+Re-written to avoid faux pas, the statement becomes:
+```{r eval=FALSE}
+Auto <- read.csv("Auto.csv", header = T, na.strings = "?")
+```
+
+To give the authors of ISL due credit, there are important things about the above statement that is completely correct: it uses a leading capital letter (`Auto`) to name a data table and leading lower-case letters (`horsepower`) as variable names.
+
+Using spaces in a consistent way helps you to distinguish between different parts of a command and let's you read the command in the same way that it will be executed.
+
+# The horror of attachment
+
+*An Introduction to Statistical Learning* makes use of a function called `assign()`.  This is a bad practice.
+
+But it's not enough to say that.  It's important to know what are the good practices to be used instead.
+
+## Example 1
+
+On p. 50 of ISL, you'll see:
+
+> To refer to a variable, we must type the data set and the variable name joined with a `$` symbol.  Alternatively, we can use the `attach()` function in order to tell R to make the variables in this data frame available by name.
+```{r fig.keep='none', eval=FALSE}
+plot(Auto$cylinders, Auto$mpg)
+attach(Auto)
+plot(cylinders, mpg)
+```
+```{r echo=FALSE, eval=FALSE}
+detach(Auto)
+```
+
+
+
+## Being pedantic
+
+Of all the kinds of objects there are in R, `assign()` is a `function`.
+```{r}
+class(assign)
+```
+But it is not a function in the mathematical sense.  A mathematical function takes one or more values as input and returns a value as output.  `Assign()` doesn't return anything.  Instead, it manipulates your R session in ways that are mysterious and unknown to the very people for whom `assign()` is most useful: beginners.
+
+The documentation for `attach()` has a section labelled "Good practice." Read it and see if you think a beginner would be able to make any sense of it.  "Good practice" is not good practice unless users can use it!

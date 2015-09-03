@@ -1,0 +1,59 @@
+---
+title: "In-Class Computing Task"
+author: "Math 253: Statistical Computing & Machine Learning"
+date: "Thursday Sept 8, 2015"
+output: rmarkdown::tufte_handout
+---
+
+This is the second in-class computing task for the course. You've already seen the following instructions from the first day's in-class task.  I'll repeat them here just to remind you.^[**Instructions**    
+1. You'll construct your answers in an `.R` script file. It's best if you name today's file `2015-09-08-inclass.R` and future files in the same pattern.  That will help you find your own files.    
+2. The script file **must** run to completion when you "source" it.  After today you'll be expected to follow the instructions even though they won't be repeated.    
+3. You'll construct your answers in an `.R` script file. It's best if you name today's file `2015-09-08-inclass.R` and future files in the same pattern.  That will help you find your own files.     
+4. The script file **must** run to completion when you "source" it. *If there are parts of your script that are incomplete, comment them out to produce a file that does run to completion while preserving your incomplete work as comments*.    
+5. Many of the tasks will involve assigning a value to a given name, such as `task3`.  Make sure to use this name exactly, including capitalization.  If you don't, the scoring system will miss your answer.    
+6. To help you keep track of your answers, you may want to use comments to divide your `.R` file into sections, like `# Task 3 -----------------`    
+7. At the end of the class, upload your file to the appropriate slot on Moodle.  Do make sure that you are using the slot corresponding to today's date so that you don't over-write previous submissions.]
+
+# Today's tasks
+
+These are meant to help you learn some basics in R.  Don't expect the answers to be immediately evident to you.
+
+## Task 1
+
+In the Chapter 2 lab from ISL, reference is made to a data set named `Auto`.  The book says, "The textfile can be obtained from this book's web site."  Here's the address: <http://www-bcf.usc.edu/~gareth/ISL/Auto.data>
+
+In your solution `.R` script, write this line and execute it **once**.  It will download the file `Auto.data` to your R system.
+```{r eval=FALSE}
+download.file("http://www-bcf.usc.edu/~gareth/ISL/Auto.data",
+              destfile="Auto.data")
+```
+
+With the file on your system, you don't need to download it again, so **comment out** the statement so that it will not be re-run every time you "source" your solution script. (The web site is slow, so it's particularly painful to download the file every time you modify your script.)
+
+Create an object called `auto_file_name` that contains the full path name to the `Auto.data` file on your system.  You can find the full path name by giving the command `file.choose()` in the console (not your solution file) and navigating to the file.  Cut and paste the output of `file.choose()` into your solution file.
+
+## Task 2
+
+Create two objects:
+
+* `Auto_bad` created by the `read.table()` method at the bottom of p. 48
+* `Auto` created by the `read.csv()` method at the middle of p. 49.
+
+You will need to replace the short string `"Auto.data"` in the book's commands with the full path name you've just stored in `auto_file_name` in Task 1.
+
+## Task 3
+
+Create an object `task3` that holds a summary of the `horsepower` variable, as with the summary near the bottom of p. 51.  **Do not use** `attach()`. You may, however, use either `$` or `with()` as you prefer. 
+
+## Task 4
+
+All the data from the book is in the `ISLR` package.  Using the Packages tab in RStudio, install this package.  In your script file, give the command to load the package.
+
+## Task 5
+
+Use the indexing operations described in ISL §2.3.3 to create the following objects:
+
+* `task5top` the subset of `Auto` consisting of the first 5 rows in the first 3 columns.
+* `task5bottom` the subset of `Auto` consisting of the last 5 rows in the last 3 columns
+
+
