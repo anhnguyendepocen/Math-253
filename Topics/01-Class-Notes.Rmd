@@ -42,7 +42,8 @@ The two terms, "statistical learning" and "machine learning," reflect mainly the
     
 ## Example 1: Machine translation of natural languages
 
-Computer scientists took this on.
+Computer scientists took this on.    
+
 * Identification of grammatical structures and tagging text.
 * Dictionaries of single-word equivalents, common phrases.
 
@@ -73,17 +74,6 @@ Now: dimension reduction (e.g. singular value decomposition), angle between spec
 
 Result: Google search
 
-# Mathematics and Data
-
-* Data tables: cases and variables.
-* A quantitative variable is a vector.
-* A categorical variable can be encoded as a set of "dummy" vectors.
-* Response variable and explanatory variable
-* The linear projection problem: find the point spanned by the explanatory variables that's closest to the response.  That linear combination is the best-fitting model.
-    * One explanatory and the response
-    * Two explanatory on board and the response on the board (perfect, but meaningless fit)
-    * Two explanatory in three-space and the response (residual likely)
-
 
 # Theoretical concepts ISL §2.1
 
@@ -102,11 +92,11 @@ Sometimes "flexibility" is used instead of "accuracy".
 
 Not flexible:\marginnote{Individual fits miss how the explanatory variables interact.}
 
-\includegraphics[width=\textwidth]{../../ISL-Book-Figures/Chapter2/{2.1}.pdf}
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter2/{2.1}.pdf}
 
 Flexible:\marginnote{Such detailed patterns are more closely associated with physical science data than with social/economic data.}
 
-\includegraphics[width=\textwidth]{../../ISL-Book-Figures/Chapter2/{2.2}.pdf}
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter2/{2.2}.pdf}
 
 --------------------
 
@@ -114,15 +104,15 @@ And in multiple variables:
 
 **Not flexible**:
 
-\includegraphics[width=\textwidth]{../../ISL-Book-Figures/Chapter2/{2.4}.pdf}
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter2/{2.4}.pdf}
 
 
 **Flexible**:
-\includegraphics[width=\textwidth]{../../ISL-Book-Figures/Chapter2/{2.5}.pdf}
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter2/{2.5}.pdf}
 
 A quick characterization of several model architectures (which they call "statistical learning methods")
 
-\includegraphics[width=\textwidth]{../../ISL-Book-Figures/Chapter2/{2.7}.pdf}
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter2/{2.7}.pdf}
 
 ## Reducible versus irreducible error
 
@@ -162,7 +152,7 @@ Classification: categorical response with more than two categories. (When there 
 * Political beliefs ... left vs right?
 
 \marginnote{ISL Figure 2.8}
-\includegraphics[width=\textwidth]{../../ISL-Book-Figures/Chapter2/{2.8}.pdf}
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter2/{2.8}.pdf}
 
 # In-class programming activity 
 

@@ -1,8 +1,0 @@
-## Week 3 Notes
-
-* In class: work through problem 13 from ISL §3.7
-* Writing likelihood functions.
-    * log likelihood
-    * nonlinear optimization
-    * graph the likelihood function near the optimum
-    

@@ -1,8 +1,9 @@
 ---
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Thursday Sept 8, 2015"
-output: rmarkdown::tufte_handout
+date: "Tuesday Sept 8, 2015"
+output: 
+  rmarkdown::tufte_handout
 ---
 
 This is the second in-class computing task for the course. You've already seen the following instructions from the first day's in-class task.  I'll repeat them here just to remind you.^[**Instructions**    
@@ -20,12 +21,12 @@ These are meant to help you learn some basics in R.  Don't expect the answers to
 
 ## Task 1
 
-In the Chapter 2 lab from ISL, reference is made to a data set named `Auto`.  The book says, "The textfile can be obtained from this book's web site."  Here's the address: <http://www-bcf.usc.edu/~gareth/ISL/Auto.data>
+In the Chapter 2 lab from ISL, reference is made to a data set named `Auto`.  The book says, "The textfile can be obtained from this book's web site."  Here's the address: <http://www-bcf.usc.edu/~gareth/ISL/Auto.csv>
 
 In your solution `.R` script, write this line and execute it **once**.  It will download the file `Auto.data` to your R system.
 ```{r eval=FALSE}
-download.file("http://www-bcf.usc.edu/~gareth/ISL/Auto.data",
-              destfile="Auto.data")
+download.file("http://www-bcf.usc.edu/~gareth/ISL/Auto.csv",
+              destfile="Auto.csv")
 ```
 
 With the file on your system, you don't need to download it again, so **comment out** the statement so that it will not be re-run every time you "source" your solution script. (The web site is slow, so it's particularly painful to download the file every time you modify your script.)
@@ -34,10 +35,7 @@ Create an object called `auto_file_name` that contains the full path name to the
 
 ## Task 2
 
-Create two objects:
-
-* `Auto_bad` created by the `read.table()` method at the bottom of p. 48
-* `Auto` created by the `read.csv()` method at the middle of p. 49.
+Create an object called `Auto` using the `read.csv()` method at the middle of p. 49
 
 You will need to replace the short string `"Auto.data"` in the book's commands with the full path name you've just stored in `auto_file_name` in Task 1.
 

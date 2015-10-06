@@ -1,0 +1,21 @@
+---
+title: "In-Class Computing Task"
+author: "Math 253: Statistical Computing & Machine Learning"
+date: "Thursday Oct 7, 2015"
+output: 
+  rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+options(width=80)
+library(mosaicData)
+library(ggplot2)
+library(scoreActivity)
+library(ISLR)
+show_answers = FALSE
+knitr::opts_chunk$set(tidy=FALSE, echo=show_answers)
+options(width=100)
+```
+
+Generate random vars with specified covariance matrix.  Do LDA and QDA to see which works better.
+
