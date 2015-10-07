@@ -25,11 +25,29 @@ The exponential distribution has one parameter, `rate`.
 
 1. Create an object `vals` containing 10 random values selected from an exponential distribution with rate $1/100$.  You can use `rexp()` for this.  Check your values to make sure they are plausible.  If an event happens at a rate of $1/100$, for instance the so-called 100-year storm, you expect the interval between events to be something like 100.
 
+```{r echo=show_answers}
+vals <- rexp(10, rate = 1 / 100)
+```
+
 2. Create an object `test200` that gives the log-likelihood of `vals` for a rate of $1/200$.  You can use `dexp()` for this, along with `sum()` and `log()`. The `dexp()` function will calculate the likelihood of each of the 10 values independently in `vals`.  Ordinarily, you would multiply them together to find the likelihood of the 10 values taken as a set.  For log-likelihood, take the log of the output of `dexp()` --- producing a 10 number result. Then *sum* over those numbers to get the log-likelihood.
+
+```{r echo = show_answers}
+test200 <- sum(log(dexp(vals, rate = 1/200)))
+```
 
 3. Write a function `LL_exp(rate)` that computes the log-likelihood of `vals` for the given `rate`.  Test it out by comparing the result to what you got in (2).
 
+```{r echo = show_answers}
+LL_exp <- function(rate) {
+  sum(log(dexp(vals, rate = rate)))
+}
+```
+
 4. Create an object `rates` that is a vector of many rates between 1/50 and 1/200. 
+
+```{r echo = show_answers}
+rates <- seq(1/200, 1/50, length=200)
+```
 
 \newpage
 
@@ -46,3 +64,13 @@ results <- sapply(rates, LL_exp)
 The R function `optimize()` will do a search over an interval for the argmax or argmin of a function. You're going to find the argmax of your `LL_exp(rate)` from the previous activity function in this way. To use `optimize()` you specify the function that for which you're searching the argmax, an interval `lower=` to `upper=` and set the argument `maximum = TRUE`. (If you don't specify `maximum = TRUE`, `optimize()` will search for an argmin.)
 
 7. Create an object `exp_results` that contains the output of `optimize()`.  Check it to make sure that your answer is consistent with that in Task 1.
+
+```{r}
+exp_results <- optimize(LL_exp, 
+                        lower=1/200, upper=1/50,
+                        maximum = TRUE)
+```
+
+```{r echo=show_answers, eval=show_answers}
+source("Day-07-Test-Statements.R")
+```

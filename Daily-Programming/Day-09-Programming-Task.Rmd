@@ -1,5 +1,5 @@
 ---
-title: "In-Class Computing Task"
+title: "In-Class Computing Task 9"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Thursday Oct 1, 2015"
 output: 
@@ -11,7 +11,7 @@ options(width=80)
 library(mosaicData)
 library(ggplot2)
 library(scoreActivity)
-show_answers = TRUE
+show_answers = FALSE
 ```
 
 This activity is about simulating complex situations where there are many different actions that can be taken depending on earlier results.  In terms of programming, you'll be writing functions that use *conditionals* to make decisions.  
@@ -82,50 +82,50 @@ is_royal_flush <- function(five_cards){
   is_straight_flush(five_cards) && min(rank(five_cards)) == 10
 }
 ```
-#. `is_straight_flush()`
+2. `is_straight_flush()`
 ```{r echo = show_answers}
 is_straight_flush <- function(five_cards) {
   is_flush(five_cards) & is_straight(five_cards)
 }
 ```
-#. `is_four_of_a_kind()`
+3. `is_four_of_a_kind()`
 ```{r echo = show_answers}
 is_four_of_a_kind <- function(five_cards) {
   max(table(ranks(five_cards))) == 4
 }
 ```
-#. `is_full_house()`
+4. `is_full_house()`
 ```{r echo = show_answers}
 is_full_house <- function(five_cards) {
   counts <- table(ranks(five_cards))
   max(counts) == 3 & min(counts) == 2
 }
 ```
-#. `is_flush()`
+5. `is_flush()`
 ```{r echo = show_answers}
 is_flush <- function(five_cards) {
   max(table(suits(five_cards))) == 5
 }
 ```
-#. `is_straight()`
+6. `is_straight()`
 ```{r echo = show_answers}
 is_straight <- function(five_cards) {
   max(diff(sort(ranks(five_cards)))) == 1
 }
 ```
-#. `is_three_of_a_kind()`
+7. `is_three_of_a_kind()`
 ```{r echo = show_answers}
 is_three_of_a_kind <- function(five_cards) {
   max(table(ranks(five_cards))) == 3
 }
 ```
-#. `is_two_pair()`
+8. `is_two_pair()`
 ```{r echo=show_answers}
 is_two_pair <- function(five_cards) {
   sum(table(ranks(five_cards)) == 2) == 2
 }
 ```
-#. `is_pair()`
+9. `is_pair()`
 ```{r echo=show_answers}
 is_pair <- function(five_cards) {
   max(table(ranks(five_cards))) == 2
@@ -185,7 +185,7 @@ before_draw <- function(...) {
 Run your `before_draw()` function many times, collecting the results.  Tabulate these and compare your results to those claimed on the Wikipedia page.  A command to do this will look like:
 
 ```{r eval=show_answers, cache=TRUE}
-table(sapply(1:100000, FUN=before_draw))
+table(sapply(1:10000, FUN=before_draw))
 ```
 
 \newpage
@@ -194,15 +194,16 @@ table(sapply(1:100000, FUN=before_draw))
 ## Test statements
 ```
 
-```{r tidy=FALSE}
+```{r eval=show_answers, echo=show_answers}
 source("Day-09-Test-Statements.R")
 ```
 
+<!--
 ## The draw
 
-After evaluating the initial five-card hand, the player decides which cards, if any, to discard and replace.  This is a matter of strategy.  Here's one:
+After evaluating the initial five-card hand, the player decides which cards, if any, to discard and replace.  This is a matter of strategy.  Here's one: -->
 
-```{r}
+```{r echo=FALSE}
 discards <- function(five_cards) {
   discard <- NULL
   card_ranks <- ranks(five_cards)
