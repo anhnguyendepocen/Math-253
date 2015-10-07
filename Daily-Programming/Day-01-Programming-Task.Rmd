@@ -8,6 +8,7 @@ output: rmarkdown::tufte_handout
 ```{r include=FALSE}
 library("scoreActivity")
 library(mosaicData)
+library(mosaic)
 show_answers <- FALSE
 knitr::opts_chunk$set(tidy=FALSE, echo=show_answers)
 ```
@@ -32,7 +33,7 @@ These are meant to help you learn some basics in R.  Don't expect the answers to
 
 There is a package called `mosaicData`.  Write the command that will load this package into R.  Note that `load()` is (surprisingly) not the correct function to do this.
 
-```{r}
+```{r echo=show_answers}
 library(mosaic)
 ```
 
@@ -43,7 +44,7 @@ You may find that `mosaicData` is not yet installed on your R system.  If not, u
 Create an object named `task2` that contains a character string like
 `r paste("Today is", date())`.  Your command should be such as to create a string with the correct date on any day in the future that the script will be evaluated.
 
-```{r}
+```{r echo=show_answers}
 task2 <- paste("Today is", date())
 ```
 
@@ -62,7 +63,7 @@ In the `mosaicData` package, there is a data frame named `Galton`.  Create these
 * `task3b` containing the number of cases in `Galton`
 * `task3c` containing the mean of `height` in `Galton`
 
-```{r}
+```{r echo=show_answers}
 task3a <- names(Galton)
 task3b <- nrow(Galton)
 task3c <- mean(Galton$height)
@@ -83,7 +84,7 @@ $$ \left(
 
 Hint: the object is a matrix.
 
-```{r}
+```{r echo=show_answers}
 task4 <- matrix(1:6, ncol=3, byrow=TRUE)
 ```
 
@@ -103,9 +104,13 @@ Create these objects:
 * `task5y` another such vector.
 * `task5pi` the value of $\pi$ estimated from a "Monte Carlo" simulation.  That is, for each of `task5x` and `task5y`, square the vector.  Then add them together and take the square root.  This will give the length from the origin to each of 1000 random points in the unit square in the first quadrant.  Finally, compute what fraction of these lengths are $\leq 1$.  That fraction is an estimate of $\pi / 4$.
 
-```{r}
+```{r echo=show_answers}
 task5x <- runif(1000)
 task5y <- runif(1000)
-task5pi <- 4 * sum(sqrt(task5x ^ 2 + task5y ^ 2) <= 1)
+task5pi <- 4 * mean(sqrt(task5x ^ 2 + task5y ^ 2) <= 1)
+```
+
+```{r echo=show_answers, eval=show_answers}
+source("Day-01-Test-Statements.R")
 ```
 

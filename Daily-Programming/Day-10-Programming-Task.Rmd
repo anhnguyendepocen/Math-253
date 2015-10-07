@@ -145,7 +145,7 @@ glm(default == "Yes" ~ income, data=Default, family="binomial")
 cat("# Test statments")
 ```
 
-```{r echo=FALSE, eval=show_answers}
+```{r echo=show_answers, eval=show_answers}
 source("Day-10-Test-Statements.R")
 ```
 
