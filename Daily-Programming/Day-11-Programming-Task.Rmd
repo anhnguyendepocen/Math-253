@@ -12,7 +12,7 @@ library(mosaicData)
 library(ggplot2)
 library(scoreActivity)
 library(ISLR)
-show_answers = FALSE
+show_answers = TRUE
 knitr::opts_chunk$set(tidy=FALSE, echo=show_answers)
 options(width=100)
 ```
@@ -154,4 +154,12 @@ It's helpful to set at a low value the transparency of the of the points.  This 
 
 ```{r echo=show_answers, eval=show_answers}
 plot(Y[,1], Y[,2], col=rgb(0,0,0,.05))
+```
+
+```{r echo=FALSE, eval=show_answers, results="asis"}
+cat("# Test statments")
+```
+
+```{r echo=show_answers, eval=show_answers}
+source("Day-11-Test-Statements.R")
 ```
