@@ -12,7 +12,7 @@ library(mosaicData)
 library(ggplot2)
 library(scoreActivity)
 library(ISLR)
-show_answers = TRUE
+show_answers = FALSE
 knitr::opts_chunk$set(tidy=FALSE, echo=show_answers)
 options(width=100)
 ```
@@ -32,9 +32,9 @@ The covariance between vectors ${\mathbf X}_i$ and ${\mathbf X}_j$, with means $
 
 \newcommand{\defeq}{\mathrel{\mathop:}=} 
 
-$$ \mbox{cov}(X_i, X_j) \defeq \mbox{E}\left[ (X_i - \mu_i)^T (X_j - \mu_i) \right]$$
+$$ \mbox{cov}(X_i, X_j) \defeq \mbox{E}\left[ ({\mathbf X}_i - \mu_i)^T ({\mathbf X}_j - \mu_i) \right]$$
 
-The *covariance matrix* is ${\mathbf \Sigma}_{ij} \defeq  \mbox{cov}(X_i, X_j)$.  It is always a *symmetrical* matrix.
+The *covariance matrix* is ${\mathbf \Sigma}_{ij} \defeq  \mbox{cov}({\mathbf X}_i, {\mathbf X}_j)$.  It is always a *symmetrical* matrix.
 
 # Matrices and their inverses
 
