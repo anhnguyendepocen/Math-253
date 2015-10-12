@@ -1,5 +1,5 @@
 library(scoreActivity)
-res <- score_set(
+Test_Statements <- score_set(
   check_exists(Red),
   check_exists(Green),
   check_exists(Blue),
@@ -12,5 +12,4 @@ res <- score_set(
   check_exists(test_LDA_two),
   leave_out_names = c("")
 )
-res$score
-cat(res$comments)
+print_test_results(Test_Statements)

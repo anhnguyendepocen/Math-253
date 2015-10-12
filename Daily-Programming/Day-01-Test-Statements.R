@@ -1,5 +1,5 @@
 require(scoreActivity)
-res <- score_set(
+Test_Statements <- score_set(
   check(TRUE, "package:mosaic" %in% search()),
   check(TRUE, is.character(task2)),
   check(TRUE, grepl("^Today is",task2) && grepl("201.$", task2)),
@@ -12,5 +12,4 @@ res <- score_set(
   check(about(pi, pm=.5), task5pi),
   leave_out_names = c("mosaicData", "height")
 )
-res$score
-cat(res$comments)
+print_test_results(Test_Statements)

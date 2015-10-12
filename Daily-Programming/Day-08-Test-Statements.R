@@ -1,5 +1,5 @@
 require(scoreActivity)
-res <- score_set(
+Test_Statements <- score_set(
   check_exists(My_data),
   check(TRUE, max(My_data$x) <= 70),
   check_exists(LL_line),
@@ -10,5 +10,4 @@ res <- score_set(
   check(TRUE, "par" %in% names(best)),
   leave_out_names = "x"
 )
-res$score
-cat(res$comments)
+print_test_results(Test_Statements)

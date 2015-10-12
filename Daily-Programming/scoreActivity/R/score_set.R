@@ -7,11 +7,27 @@
 #   Check Package:             'Cmd + Shift + E'
 #   Test Package:              'Cmd + Shift + T'
 
+
 #' @export
 score_set <- function(..., leave_out_names = NULL) {
   # Collect the dots into the set of expressions.
-  ldots <- lazy_dots(...)
+  res <- list()
+  res$ldots <- lazy_dots(...)
+  res$leave_out_names <- leave_out_names
 
+  res
+}
+
+#' @export
+print_test_results <- function(test_statements) {
+  res <- find_score(test_statements)
+  cat(res$comments)
+}
+
+#' @export
+find_score <- function(test_statements) {
+  ldots <- test_statements$ldots
+  leave_out_names <- test_statements$leave_out_names
   score <- 0
   results <- NULL
 
@@ -24,25 +40,25 @@ score_set <- function(..., leave_out_names = NULL) {
   missing_names <- object_names[ ! sapply(object_names, FUN=exists)]
 
   for (k in seq_along(ldots)) {
-      res <- try(lazy_eval(ldots[k])[[1]], silent=TRUE)
-      if (inherits(res, "try-error")) {
-        # no change in score
-        results[k] <- paste("ERROR when running ", deparse(ldots[k][[1]]$expr))
-      } else {
-        # no problems running the statement
-        score <- score + res$pts
-        results[k] <- res$message
-      }
-
+    res <- try(lazy_eval(ldots[k])[[1]], silent=TRUE)
+    if (inherits(res, "try-error")) {
+      # no change in score
+      results[k] <- paste("ERROR when running ", deparse(ldots[k][[1]]$expr))
+    } else {
+      # no problems running the statement
+      score <- score + res$pts
+      results[k] <- res$message
     }
-    if (length(missing_names > 0))
-      results <- c(
-        paste0("MISSING OBJECT",
-               ifelse(length(missing_names)==1,": ","S: "),
-               paste(missing_names, collapse=", ")),
-        results
-      )
 
+  }
+  if (length(missing_names > 0)) {
+    results <- c(
+      paste0("MISSING OBJECT",
+             ifelse(length(missing_names)==1,": ","S: "),
+             paste(missing_names, collapse=", ")),
+      results
+    )
+  }
   list(score = score, comments = knitr::asis_output(paste0(results, collapse = "\n")))
 }
 

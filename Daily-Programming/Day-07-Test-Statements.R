@@ -1,5 +1,5 @@
 require(scoreActivity)
-res <- score_set(
+Test_Statements <- score_set(
   check_exists(vals),
   check(TRUE, min(vals) >= 0),
   check(TRUE, test200 < -20),
@@ -10,5 +10,4 @@ res <- score_set(
   check(TRUE, "objective" %in% names(exp_results) ),
   check(TRUE, "maximum" %in% names(exp_results))
 )
-res$score
-cat(res$comments)
+print_test_results(Test_Statements)

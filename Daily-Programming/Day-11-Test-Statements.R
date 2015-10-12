@@ -1,5 +1,5 @@
 library(scoreActivity)
-res <- score_set(
+Test_Statements <- score_set(
   check_exists(A_inv),
   check_exists(W),
   check_exists(A_chol),
@@ -12,5 +12,4 @@ res <- score_set(
   check(TRUE, all(abs(Y - W %*% A_chol) < 0.01)),
   leave_out_names = "default"
 )
-res$score
-cat(res$comments)
+print_test_results(Test_Statements)

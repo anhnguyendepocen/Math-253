@@ -1,5 +1,5 @@
 require(scoreActivity)
-res <- score_set(
+Test_Statements <- score_set(
   check(TRUE, is.function(ranks)),
   check(TRUE, is.function(suits)),
   check(TRUE, is_pair(c(21,22,33,41,52))),
@@ -11,5 +11,4 @@ res <- score_set(
   check(FALSE, is_straight_flush(c(21,31,42,52,62))),
   check(TRUE, is_straight_flush(c(21,31,41,51,61)))
 )
-res$score
-cat(res$comments)
+print_test_results(Test_Statements)
