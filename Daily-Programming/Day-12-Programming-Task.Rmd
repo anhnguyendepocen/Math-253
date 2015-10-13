@@ -13,7 +13,7 @@ library(ggplot2)
 library(scoreActivity)
 library(ISLR)
 library(scales) # for simple transparency in colors
-show_answers = TRUE
+show_answers = FALSE
 knitr::opts_chunk$set(tidy=FALSE, echo=show_answers)
 options(width=100)
 ```

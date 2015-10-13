@@ -1,0 +1,14 @@
+---
+title: "Class Notes"
+author: "Statistical Computing & Machine Learning"
+date: "Class 13"
+output: rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+require(mosaic)
+require(mosaicData)
+require(ISLR)
+knitr::opts_chunk$set(tidy=FALSE)
+```
+
