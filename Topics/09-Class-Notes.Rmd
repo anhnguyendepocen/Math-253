@@ -15,7 +15,7 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 Likelihood.
 
-* Choose the "best" of a set of competing models.
+* Choose the "best" of a set of competing models. Often the set is parameterized by quantities such as slope $m$, intercept $b$, rate , mean, standard deviation, ...
 * "Figure of merit" for each model is the probability of the data given the model.
 * Often, models have a deterministic part (e.g. $m x + b$) and a random part $\epsilon$.
 * Part of the model is our choice for the distribution of $\epsilon$.
@@ -42,7 +42,7 @@ Determine annual payment amount for student loans.  E.g.
 
 * If it's a student, no payment, otherwise $100
 * If it's a student, no payment.  Otherwise 10% of the balance.
-* If the balance is greater than 10 times the income, 10% of the balance, otherwise 5%.
+* If the balance is less than 10 times the income, 10% of the balance, otherwise 5% of income.
 * For those in default, nothing.  For the others, any of the above three schemes.
 
 ## if ... else ... examples

@@ -12,3 +12,40 @@ require(ISLR)
 knitr::opts_chunk$set(tidy=FALSE)
 ```
 
+# Review
+
+The multivariate Gaussian
+
+* Mean is specified by a vector ${\bf \mu}$; the mean for each predictor.
+* Matrix ${\mathbf \Sigma}$: Covariance matrix among predictors.
+
+# LDA
+
+All classes are treated as having the same ${\mathbf \Sigma}$.
+
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter4/{4.6}.pdf}
+\marginnote[-2cm]{Figure 4.6 from ISL}
+
+# QDA
+
+Classes are treated with different  ${\mathbf \Sigma}_i$.
+
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter4/{4.9}.pdf}
+\marginnote[-2cm]{Figure 4.9 from ISL}
+
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter4/{4.10}.pdf}
+\marginnote[-2cm]{Figure 4.10 from ISL}
+
+Scenarios: In all, class means are different.
+
+1. Each class is two uncorrelated Gaussian random vars. 
+2. Both classes had a correlation of $-0.5$
+3. Uncorrelated, like (1), but the distribution is t(df=?): long tailed to right.
+
+
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter4/{4.11}.pdf}
+\marginnote[-2cm]{Figure 4.11 from ISL}
+
+4. Like (2), but one class has $\rho = 0.5$ and the other $\rho = -0.5$
+5. A nonlinear predictor with $X_1^2$, $X_2^2$, $X_1 \times X_2$ giving a quadratic decision boundary
+6. A decision boundary more complicated than a quadratic.

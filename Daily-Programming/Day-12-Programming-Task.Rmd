@@ -34,10 +34,10 @@ You'll make two data sets, each of which will have two classes of outcomes: `"re
 * Create an object `covar_1` which is a 2 x 2 matrix with 3 and 1 on the diagonal and $-1.7$ on the off-diagonal. It should be structured as a covariance matrix.
 * Similarly, create an object `covar_2`, a covariance matrix with 2 and 3 on the diagonal and $1.5$ on the off-diagonal.
 * Create three matrices, `one`, `two`, and `three`.  Each should have the appropriate shape for data from `n_cases` cases and two variables. The variables should each be `n_cases` random draws from a $\mbox{N}(0, 1^2)$ distribution, that is, a normal distribution with mean zero and standard deviation $1$.\marginnote[-2cm]{In specifying the normal distribution, one needs to decide whether to report the standard deviation or the variance.  R uses \texttt{sd=}.  To help to eliminate ambiguity in mathematical notation, the form $1^2$ is used simply as a reminder that the quantity is a variance.}
-* Create an matrix `red` that is `One` times the Cholesky decomposition of `covar_1`.  The `red` matrix will contain correlated random variables with a covariance of approximately `covar_1`.
-* Similarly, create a matrix `green` which will be `Two` times the Cholesky decomposition of `covar_1`.
-* Also create a matrix `blue` which will be `Three` times the Cholesky decomposition of the other covariance matrix, `covar_2`.
-* Modify the `red`, `green` and `blue` matrices by adding to each column a value for the mean drawn from `red_mean`, `green_mean`, and `blue_mean` respectively.\marginnote[-2.5cm]{{\em Hint}: It won't work to do the obvious, simple thing, e.g.  add \texttt{red\_mean} to \texttt{red}. There are many ways to construct a statement that works.  Among others, there's a way using \texttt{outer()}, a way using \texttt{matrix()}, and even a way using \texttt{t()} twice.}
+* Create an matrix `red` that is `one` times the Cholesky decomposition of `covar_1`.  The `red` matrix will contain correlated random variables with a covariance of approximately `covar_1`.
+* Similarly, create a matrix `green` which will be `two` times the Cholesky decomposition of `covar_1`.
+* Also create a matrix `blue` which will be `three` times the Cholesky decomposition of the other covariance matrix, `covar_2`.
+* Modify the `red`, `green` and `blue` matrices by adding to each column a value for the mean drawn from `red_mean`, `green_mean`, and `blue_mean` respectively.\marginnote[-2.5cm]{{\em Hint}: It won't work to do the obvious, simple thing, e.g.  add \texttt{red\_mean} to \texttt{red}. There are many ways to construct a statement that works.  Among others, there's a way using \texttt{outer()}, a way using \texttt{matrix()}, and even a way using \texttt{t()} twice.} That is, for `red`, add 1 to the first column and 0 to the second.
 
 \newpage
 
@@ -45,6 +45,11 @@ You'll make two data sets, each of which will have two classes of outcomes: `"re
     - `Red` will have `x` as the first column of `red`, `y` as the second column of `red`, and `class` set equal to the string "red".
     - `Blue` will be the same thing but using the columns of `blue` and the `class` set to `"blue"`
     - `Green` is similar, using the columns of `green` and the class `"green"`.
+* Last step in generating the simulated data: make two data frames each of which combines "data" from two classes.
+```{r echo=TRUE, eval=FALSE}
+Sim_one <- rbind(Red, Green)
+Sim_two <- rbind(Red, Blue)
+```
 
 ```{r echo=show_answers}
 n_cases <- 10000
@@ -54,9 +59,14 @@ blue_mean <- c(-1, 1)
 covar_1 <- matrix(c(3, -1.7, -1.7, 2), nrow=2, ncol=2)
 covar_2 <- matrix(c(2, 1.5, 1.5, 3), nrow=2, ncol=2)
 one <- matrix(rnorm(2 * n_cases), ncol=2, nrow=n_cases)
-two <- matrix(rnorm(2 * n_cases), ncol=2, nrow=n_cases)
+# other ways to do this
+#       cbind(rnorm(n_cases), rnorm(n_cases))
+#       matrix(rnorm(2 * n_cases), ncol=2)
+two <- matrix(rnorm(2 * n_cases), ncol=2)
 three <- matrix(rnorm(2 * n_cases), ncol=2, nrow=n_cases)
 red <- one %*% chol(covar_1) + outer(rep(1, n_cases), red_mean)
+# Another way to generate the matrix to the right of +
+#      matrix(red_mean, nrow = n_cases, ncol = 2, byrow = TRUE)
 green <- two %*% chol(covar_1) + outer(rep(1, n_cases), green_mean)
 blue <- three %*% chol(covar_2) + outer(rep(1, n_cases), blue_mean)
 Red <- data.frame(x = red[,1], y = red[,2], class="red", 
