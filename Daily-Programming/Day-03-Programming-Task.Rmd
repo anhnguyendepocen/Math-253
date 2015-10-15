@@ -8,7 +8,6 @@ output:
 
 ```{r include=FALSE}
 library(ISLR)
-library(scoreActivity)
 show_answers = FALSE
 ```
 
@@ -93,4 +92,9 @@ You might be interested to look at the ratio of `MSE_train` to `MSE_test`.
 
 ```{r echo = show_answers}
 MSE_train / MSE_test
+```
+
+```{r echo=FALSE}
+require(scoreActivity, quietly = TRUE )
+score253(day=3)
 ```
