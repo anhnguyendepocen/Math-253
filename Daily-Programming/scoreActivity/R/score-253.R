@@ -14,5 +14,9 @@ score253 <- function(day) {
   git_location <- "https://raw.githubusercontent.com/dtkaplan/Math-253/master/"
   test_file <- paste0("Daily-Programming/Day-",day,"-Test-Statements.R")
   cat("--------\nRunning test statements for day ", day, "\n\n")
-  source(paste0(git_location, test_file))
+  tests <- textConnection(RCurl::getURL(paste0(git_location, test_file)))
+  source(tests)
+  close(tests)
+
+#  source(paste0(git_location, test_file))
   }
