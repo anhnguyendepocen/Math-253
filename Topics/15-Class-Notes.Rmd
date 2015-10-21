@@ -1,0 +1,22 @@
+---
+title: "Class Notes"
+author: "Statistical Computing & Machine Learning"
+date: "Class 15"
+output: rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+require(mosaic)
+require(ISLR)
+knitr::opts_chunk$set(tidy=FALSE)
+```
+
+# Programming
+
+Functionals.  How `optim()` allows you to pass the various other arguments, e.g. `data=` to the function being optimized.
+
+Solvers
+
+## Daily activity
+
+Write a k-fold cross validator.

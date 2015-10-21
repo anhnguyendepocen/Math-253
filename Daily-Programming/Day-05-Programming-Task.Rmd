@@ -102,3 +102,10 @@ lines(My_bars)
 polygon(My_bars, col="gray")
 ```
 
+```{r echo=FALSE, eval=show_answers, results="asis"}
+cat("# Test statments")
+```
+
+```{r echo=show_answers, eval=show_answers}
+source("Day-05-Test-Statements.R")
+```
