@@ -74,8 +74,7 @@ Often you want to customize graphics, that is, set features of the graphic such 
 
 Use each of these optional arguments to customize a graphic:
 
-* `col = ` sets the color of points.  Values like "red", "blue", "wheat", etc. can be used.  (Evaluate `colors()` at the console to see a complete list.) If you want a transparent color, use a construction like `col = col2rgb('tomato', alpha = .1)`
-* `fill = ` is like `col`, but sets the fill color for polygons.
+* `col = ` sets the color of points or lines and the fill of polygons.  Values like "red", "blue", "wheat", etc. can be used.  (Evaluate `colors()` at the console to see a complete list.) If you want a transparent color, use a construction like `col = col2rgb('tomato', alpha = .1)`
 * `lwd = ` takes a number indicating line width.
 * `pch = ` takes a small integer to set the shape of the point made by `points()`, or a single character, e.g. `x`.
 * `xlab = ` and `ylab =` set the x- and y-axis labels repectively
