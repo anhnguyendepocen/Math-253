@@ -2,6 +2,8 @@
 title: "In-Class Computing Task 9"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Thursday Oct 1, 2015"
+params:
+  show_answers: TRUE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -11,7 +13,6 @@ options(width=80)
 library(mosaicData)
 library(ggplot2)
 library(scoreActivity)
-show_answers = FALSE
 ```
 
 This activity is about simulating complex situations where there are many different actions that can be taken depending on earlier results.  In terms of programming, you'll be writing functions that use *conditionals* to make decisions.  
@@ -77,56 +78,56 @@ Write two functions, `suits()` and `ranks()` that take a set of cards and return
 Write these functions to evaluate a 5-card hand: 
 
 1. `is_royal_flush()`
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 is_royal_flush <- function(five_cards){
   is_straight_flush(five_cards) && min(rank(five_cards)) == 10
 }
 ```
 2. `is_straight_flush()`
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 is_straight_flush <- function(five_cards) {
   is_flush(five_cards) & is_straight(five_cards)
 }
 ```
 3. `is_four_of_a_kind()`
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 is_four_of_a_kind <- function(five_cards) {
   max(table(ranks(five_cards))) == 4
 }
 ```
 4. `is_full_house()`
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 is_full_house <- function(five_cards) {
   counts <- table(ranks(five_cards))
   max(counts) == 3 & min(counts) == 2
 }
 ```
 5. `is_flush()`
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 is_flush <- function(five_cards) {
   max(table(suits(five_cards))) == 5
 }
 ```
 6. `is_straight()`
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 is_straight <- function(five_cards) {
   max(diff(sort(ranks(five_cards)))) == 1
 }
 ```
 7. `is_three_of_a_kind()`
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 is_three_of_a_kind <- function(five_cards) {
   max(table(ranks(five_cards))) == 3
 }
 ```
 8. `is_two_pair()`
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 is_two_pair <- function(five_cards) {
   sum(table(ranks(five_cards)) == 2) == 2
 }
 ```
 9. `is_pair()`
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 is_pair <- function(five_cards) {
   max(table(ranks(five_cards))) == 2
 }
@@ -163,7 +164,7 @@ before_draw <- function(...) {
 }
 ```
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 before_draw <- function(...) {
   five_cards <- sample(poker_deck, 5)
   if (is_royal_flush(five_cards)) return("Royal Flush")
@@ -184,18 +185,18 @@ before_draw <- function(...) {
 
 Run your `before_draw()` function many times, collecting the results.  Tabulate these and compare your results to those claimed on the Wikipedia page.  A command to do this will look like:
 
-```{r eval=show_answers, cache=TRUE}
+```{r eval=params$show_answers, cache=TRUE}
 table(sapply(1:10000, FUN=before_draw))
 ```
 
 \newpage
 
-```{r eval=show_answers, results="asis", echo=FALSE}
+```{r eval=params$show_answers, results="asis", echo=FALSE}
 ## Test statements
 ```
 
-```{r eval=show_answers, echo=show_answers}
-source("Day-09-Test-Statements.R")
+```{r eval=params$show_answers, echo=params$show_answers}
+source("Day-09-Test-Statements.R", local = TRUE)
 ```
 
 <!--

@@ -37,7 +37,7 @@ find_score <- function(test_statements) {
     object_names <- c(object_names, all.names(ldots[k][[1]]$expr))
   }
   object_names <- setdiff(unique(object_names), leave_out_names)
-  missing_names <- object_names[ ! sapply(object_names, FUN=exists, inherits=TRUE)]
+  missing_names <- object_names[ ! sapply(object_names, FUN=exists, envir = parent.frame())]
 
   for (k in seq_along(ldots)) {
     res <- try(lazy_eval(ldots[k])[[1]], silent=TRUE)
@@ -51,14 +51,15 @@ find_score <- function(test_statements) {
     }
 
   }
-  if (length(missing_names > 0)) {
-    results <- c(
-      paste0("MISSING OBJECT",
-             ifelse(length(missing_names)==1,": ","S: "),
-             paste(missing_names, collapse=", ")),
-      results
-    )
-  }
+  # This doesn't work in rmarkdown::render()
+  # if (length(missing_names > 0)) {
+  #   results <- c(
+  #     paste0("MISSING OBJECT",
+  #            ifelse(length(missing_names)==1,": ","S: "),
+  #            paste(missing_names, collapse=", ")),
+  #     results
+  #   )
+  # }
   list(score = score, comments = knitr::asis_output(paste0(results, collapse = "\n")))
 }
 

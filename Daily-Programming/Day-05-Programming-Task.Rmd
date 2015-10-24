@@ -2,6 +2,8 @@
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Thursday Sept 17, 2015"
+params:
+  show_answers: TRUE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -9,7 +11,6 @@ output:
 ```{r include=FALSE}
 library(scoreActivity)
 library(mosaicData)
-show_answers = FALSE
 ```
 
 In today's programming task, you'll recreate a basic graphics functionality in R, drawing a histogram.  Of course, in actual practice, you would never do this.  The histogram programs in base graphics, lattice graphics, and ggplot2 are easy to use and likely more powerful than something you would produce.  The purpose here is to give you experience with graphics-related calculations.
@@ -20,7 +21,7 @@ Load the `mosaicData` package, so that you have access to the `Galton` data tabl
 
 Create an object `nbins` and give it the value 10.
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 library(mosaicData)
 nbins <- 10
 ```
@@ -29,7 +30,7 @@ nbins <- 10
 
 Create an object, `evenly_spaced`, that consists of `nbins + 1` evenly spaced values between the minimum and maximum of the `height` variable in `Galton`.
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 evenly_spaced <- with(Galton, 
                       seq(min(height), 
                           max(height), 
@@ -40,7 +41,7 @@ evenly_spaced <- with(Galton,
 
 Create an object, `bin_counts`, that contains the number of cases in `Galton` where `height` falls into each bin.  Hint: You might find `cut()` and `table()` useful functions.
 
-```{r echo=bin_counts}
+```{r echo=params$show_answers}
 bin_counts <- table( cut(Galton$height, breaks=evenly_spaced))
 ```
 
@@ -48,7 +49,7 @@ bin_counts <- table( cut(Galton$height, breaks=evenly_spaced))
 
 Make a data frame, `hist_basics`, that contains three variables, `xL`, `xR`, and `count`.  The `xL` variable should be the values of `evenly_spaced` except for the last one. The `xR` variable should be the values of `evenly_spaced` except for the *first* one.  `count` will be the same as `as.numeric(bin_counts)`. 
 
-```{r echo=bin_counts}
+```{r echo=params$show_answers}
 hist_basics <- data.frame(xL = evenly_spaced[-length(evenly_spaced)],
                           xR = evenly_spaced[-1],
                           count = as.numeric(bin_counts))
@@ -84,7 +85,7 @@ one_to_five <- function(hist_data) {
 
 Use these two functions (you'll have to include them in your script) to create a data frame called `My_bars` that has five rows for each row in `hist_basics`.
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 My_bars <- one_to_five(hist_basics)
 ```
 
@@ -96,16 +97,16 @@ Draw the histogram.
 * `lines(My_bars)` will draw the bounding lines of each bar.
 * `polygon(My_bars)` will draw a polygon.  The `col = ` argument will set the color.
 
-```{r echo=show_answers, eval = show_answers}
+```{r echo=params$show_answers, eval = params$show_answers}
 plot(My_bars, type = "n")
 lines(My_bars)
 polygon(My_bars, col="gray")
 ```
 
-```{r echo=FALSE, eval=show_answers, results="asis"}
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
 cat("# Test statments")
 ```
 
-```{r echo=show_answers, eval=show_answers}
-source("Day-05-Test-Statements.R")
+```{r echo=params$show_answers, eval=params$show_answers}
+source("Day-05-Test-Statements.R", local=TRUE)
 ```

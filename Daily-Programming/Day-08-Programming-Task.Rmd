@@ -2,6 +2,8 @@
 title: "In-Class Computing Task 8"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Tuesday Sept 29, 2015"
+params:
+  show_answers: TRUE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -10,7 +12,6 @@ output:
 options(width=80)
 library(mosaicData)
 library(ggplot2)
-show_answers = TRUE
 ```
 
 Likelihood is the probability of the observed data given the model. In the previous in-class activity, you computed the likelihood for a set of models: exponential distributions with various values for the `rate` parameter.  When considering a fixed data set, at each single value of `rate`, there is just one likelihood value.  Calculating the likelihood for a set of `rates` allows you to find the value of `rates` that maximizes the likelihood.  For the purpose of estimating the "best" value of a parameter like `rate` on the data set, the parameter with the maximum likelihood is usually taken as the estimate.
@@ -25,7 +26,7 @@ In this activity, you are going to use functions that find the maximum for you, 
     - `x` a set of 100 random numbers uniformly distributed over the interval 20 to 70.
     - `y` the values `5 + 3*x + 2*rnorm(100)`
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 set.seed(101)
 My_data <- data.frame(x = runif(100, min=20, max=70))
 My_data$y <- 5 + 3*My_data$x + 2*rnorm(100)
@@ -39,7 +40,7 @@ My_data$y <- 5 + 3*My_data$x + 2*rnorm(100)
 sum(log(dnorm(y - (m * x + b), sd = sigma)))
 ```
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 LL_line = function(params) {
   m <- params[1]
   b <- params[2]
@@ -53,7 +54,7 @@ LL_line = function(params) {
     - for A: $m=3, b=5, \sigma=2$
     - for B: $m=4, b=1, \sigma=10$
     
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 testA <- LL_line(c(m=3, b=5, sigma=2))
 testB <- LL_line(c(m=4, b=1, sigma=10))
 ```
@@ -66,7 +67,7 @@ testB <- LL_line(c(m=4, b=1, sigma=10))
 starting_params <- c(4, 1, 10)
 ```
 
-```{r echo=TRUE, eval=show_answers}
+```{r echo=TRUE, eval=params$show_answers}
 best <- optim(starting_params, LL_line, control=list(fnscale = -1))
 ```
 
@@ -97,7 +98,7 @@ Each individual trip's waiting time is modeled as random. You can choose whateve
 
 With `taxi_likelihood()`, use `optim()` to find the maximum likelihood estimate of `base_fare`, `per_mile`, and the `params`.  Store the result of `optim()` under the name `best`.
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 taxi_likelihood <- function(params, data=Taxi_trips) {
   base_fare <- params[1]
   per_mile  <- params[2]
@@ -118,11 +119,11 @@ Plot `fare_amount` versus `trip_distance` as a scatter plot.  Then add a line sh
 
 Use your fitted model to estimate the component of each trip's fare that's due to standing-still time.
 
-```{r echo=show_answers, eval=show_answers}
+```{r echo=params$show_answers, eval=params$show_answers}
 plot(fare_amount ~ trip_distance, data = Taxi_trips, pch=20, alpha=.2)
 abline(best$par[1], best$par[2], col="red", lwd=3)
 ```
 
-```{r eval=show_answers, echo=show_answers}
-source("Day-08-Test-Statements.R")
+```{r eval=params$show_answers, echo=params$show_answers}
+source("Day-08-Test-Statements.R", local=TRUE)
 ```

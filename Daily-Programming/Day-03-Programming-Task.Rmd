@@ -2,13 +2,14 @@
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Thursday Sept 10, 2015"
+params:
+  show_answers: TRUE
 output: 
   rmarkdown::tufte_handout
 ---
 
 ```{r include=FALSE}
 library(ISLR)
-show_answers = FALSE
 ```
 
 
@@ -27,7 +28,7 @@ data(College, package = "ISLR")
 
 Create a variable called `Yield` within the `College` data table.  The yield is defined by college admissions officers to be the number of students enrolled divided by the number of students accepted. (Applications are another matter altogether.)
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 College$Yield <- with(College, Accept / Enroll)
 ```
 
@@ -41,7 +42,7 @@ Divide `College` into two data frames, one for training and testing.
 * Create a data frame object `Train_data` with the rows from `College` corresponding to `train_indices`.  Hint: `College[ , ]`
 * Create a data frame object `Test_data` with the rows from `College` corresponding to `test_indices`.
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 all_indices <- 1:nrow(College)
 train_indices <- sample(all_indices, size = 200)
 test_indices <- setdiff(all_indices, train_indices)
@@ -53,7 +54,7 @@ Test_data <- College[test_indices,]
 
 Using `Train_data`, construct a model of `Yield` as a function of `Top10perc`, `Outstate` (tuition), and  `Expend`. Arrange things so that the name of the object holding the model is `Yield_mod1`.
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 Yield_mod1 <- lm(Yield ~ Top10perc + Outstate + Expend,
                  data=Train_data)
 ```
@@ -62,19 +63,19 @@ Yield_mod1 <- lm(Yield ~ Top10perc + Outstate + Expend,
 
 * Create an object `Y_train` which holds just the `Yield` from the training data. Hint: `Train_data$Yield`
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 Y_train <- Train_data$Yield
 ```
 
 * Create an object `fhat_train` which is the output of the model for the inputs in the training data. Hint: `predict(Yield_mod1, newdata = Train_data )`
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 fhat_train <- predict(Yield_mod1, newdata = Train_data)
 ```
 
 * Create an object `MSE_train` that holds the mean square error for the training data. The value contained in this object will be a single number.
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 MSE_train <- mean((Y_train - fhat_train)^2) 
 ```
 
@@ -82,7 +83,7 @@ MSE_train <- mean((Y_train - fhat_train)^2)
 
 Repeat Task 5, but for the testing data.  Everywhere `Train` or `train` appears in step 5, use `Test` or `test` in this step.  You'll end up with an object called `MSE_test`.
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 Y_test <- Test_data$Yield
 fhat_test <- predict(Yield_mod1, newdata = Test_data)
 MSE_test <- mean((Y_test - fhat_test)^2) 
@@ -90,12 +91,12 @@ MSE_test <- mean((Y_test - fhat_test)^2)
 
 You might be interested to look at the ratio of `MSE_train` to `MSE_test`. 
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 MSE_train / MSE_test
 ```
 
 ```{r echo=FALSE}
 require(scoreActivity, quietly = TRUE )
-score253(day=3)
+source("Day-03-Test-Statements.R", local=TRUE)
 ```
 

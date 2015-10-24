@@ -2,6 +2,8 @@
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Tuesday Oct 27, 2015"
+params:
+  show_answers: TRUE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -12,8 +14,7 @@ library(mosaicData)
 library(ggplot2)
 library(scoreActivity)
 library(ISLR)
-show_answers = FALSE
-knitr::opts_chunk$set(tidy=FALSE, echo=show_answers)
+knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
 options(width=100)
 ```
 
@@ -54,6 +55,8 @@ Your function will perform the same operation k times.  Doing this will produce 
 3. Fill in the operations to be carried out inside the loop
 4. Tidy up the accumulator to produce the final result.
 
+\newpage
+
 Here's a code fragment that handles (1), (2), and (4).
 ```{r eval=FALSE, echo=TRUE}
 mspe <- numeric(k)
@@ -79,7 +82,7 @@ Here's what to do inside the loop:
 6. Save the MSPE in the appropriate slot of `mspe`.
 
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 k_fold1 <- function(formula, method = lm, data = mtcars, predfun = predict, k = 10) {
   mspe <- numeric(k)
   sets <- (1:nrow(data) %% k) + 1 
@@ -118,7 +121,7 @@ Modify `k_fold()` in the following ways:
 * Replace `predict()` with `predfun()`
 * Replace `[["mpg"]]` with `[[as.character(formula[[2]]) ]]`.^[Indexing formula objects enables extraction of parts of the formula.  For those with an interest in computer languages, a formula can be used as a parse tree, with the operator (e.g. `~` or `+`, etc.) at the top and the arguments underneath.]
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 k_fold <- function(formula, method = lm, data = mtcars, predfun = predict, k = 10) {
   mspe <- numeric(k)
   sets <- (1:nrow(data) %% k) + 1 
@@ -136,7 +139,7 @@ k_fold <- function(formula, method = lm, data = mtcars, predfun = predict, k = 1
 ```
 
 Test out your function using the same data and formula as before, that is:
-```{r eval = show_answers, echo=TRUE}
+```{r eval = params$show_answers, echo=TRUE}
 k_fold(formula = mpg ~ hp + wt + am, data=mtcars)
 ```
 
@@ -144,10 +147,10 @@ You should get the same answer as with `k_fold1()`.
 
 
 
-```{r echo=FALSE, eval=show_answers, results="asis"}
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
 cat("# Test statments")
 ```
 
-```{r echo=show_answers, eval=show_answers}
-source("Day-13-Test-Statements.R")
+```{r echo=params$show_answers, eval=params$show_answers}
+source("Day-13-Test-Statements.R", local = TRUE)
 ```

@@ -2,6 +2,8 @@
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Thursday Oct 8, 2015"
+params: 
+  show_answers: TRUE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -12,8 +14,7 @@ library(mosaicData)
 library(ggplot2)
 library(scoreActivity)
 library(ISLR)
-show_answers = TRUE
-knitr::opts_chunk$set(tidy=FALSE, echo=show_answers)
+knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
 options(width=100)
 ```
 
@@ -48,13 +49,13 @@ $${\mathbf A} \defeq \left[ \begin{array}{rr}
 
 * Create a matrix object `A` to represent ${\mathbf A}$
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 A <- matrix(c(1, -0.7, -0.7, 1), nrow=2, ncol=2)
 ```
 
 * Create a matrix object `A_inv` holding the inverse ${\mathbf A}^{-1}$.  (*Hint*: See `solve()`.)
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 A_inv <- solve(A)
 ```
 
@@ -70,7 +71,7 @@ For matrices that are symmetrical^[And positive definite, but never mind that fo
 
 * Create a matrix `A_chol` which is the Cholesky decomposition of A.
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 A_chol <- chol(A)
 ```
 
@@ -86,7 +87,7 @@ In previous work, you've generated random vectors.
 
 * To start, make two vectors `x1` and `x2` of length 10 using `rnorm(10)`.  The mean of a vector generated in this way is usually close to zero. (The standard error of the mean is $1/sqrt{n}$, where $n$ is the length of the vector.)
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 x1 <- rnorm(10)
 x2 <- rnorm(10)
 x1 <- cbind(x1)
@@ -106,7 +107,7 @@ Multiply `t(X)` by `X`.  You should get a symmetrical matrix where the off-diago
 
 * Generate vectors `w1` and `w2` and the matrix `W` in the same way as you just generated `X`, but instead of length 10, make them length 10,000.  Also calculate `W_cov`, the covariance matrix for the two variables in `W`.
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 w1 <- rnorm(10000)
 w2 <- rnorm(10000)
 W <- cbind(w1, w2)
@@ -120,19 +121,19 @@ Note that the covariance matrix is very close to being diagonal.  The is because
 It's easy to generate sets of uncorrelated random vectors, such as `X` or `W`.  Now you're going to modify `X` to produce a new matrix with covariance $A$ (from the first section).
 
 * Create matrix `A_inv_chol` which is the Cholesky decomposition of the inverse of A. (Note that `A_inv_chol` is meant to imply "Take the inverse of A, and then the Cholesky decomposition of that.")
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 A_inv_chol <- chol(solve(A))
 ```
 
 * Multiply `X` by `A_chol`.  The result --- call it `Y` --- should be a matrix of the same dimensions as `X`.
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 Y <- X %*% A_chol
 ```
 
 The covariance matrix of `Y` should be similar to `A`, but `Y` is so short that there will be lots of random fluctuations.
 
-```{r echo=show_answers, eval=show_answers}
+```{r echo=params$show_answers, eval=params$show_answers}
 t(Y) %*% Y / nrow(Y)
 ```
 
@@ -140,7 +141,7 @@ t(Y) %*% Y / nrow(Y)
 
 Check whether the covariance matrix of this new, bigger `Y` is close to `A`.  The difference between `A` and the covariance matrix of `Y` should be similar in size to $1/\sqrt{n}$.  Is it?
 
-```{r echo=show_answers, eval=show_answers}
+```{r echo=params$show_answers, eval=params$show_answers}
 Y <- W %*% A_chol
 t(Y) %*% Y / nrow(Y)
 ```
@@ -152,14 +153,14 @@ t(Y) %*% Y / nrow(Y)
 
 It's helpful to set at a low value the transparency of the of the points.  This lets you see more detail of the dense part of the distribution. Try `col = rgb(0, 0, 0, .05)`.
 
-```{r echo=show_answers, eval=show_answers}
+```{r echo=params$show_answers, eval=params$show_answers}
 plot(Y[,1], Y[,2], col=rgb(0,0,0,.05))
 ```
 
-```{r echo=FALSE, eval=show_answers, results="asis"}
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
 cat("# Test statments")
 ```
 
-```{r echo=show_answers, eval=show_answers}
-source("Day-11-Test-Statements.R")
+```{r echo=params$show_answers, eval=params$show_answers}
+source("Day-11-Test-Statements.R", local = TRUE)
 ```

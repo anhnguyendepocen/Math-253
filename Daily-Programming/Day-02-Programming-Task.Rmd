@@ -2,6 +2,8 @@
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Tuesday Sept 8, 2015"
+params:
+  show_answers: TRUE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -9,7 +11,6 @@ output:
 ```{r include=FALSE}
 library(scoreActivity)
 library(ISLR)
-show_answers = FALSE
 ```
 
 This is the second in-class computing task for the course. You've already seen the following instructions from the first day's in-class task.  I'll repeat them here just to remind you.^[**Instructions**    
@@ -35,7 +36,7 @@ In your solution `.R` script, write this line and execute it **once**.  It will 
 #               destfile="Auto.csv")
 ```
 
-```{r echo=FALSE}
+```{r echo=params$show_answers, cache=TRUE}
 download.file("http://www-bcf.usc.edu/~gareth/ISL/Auto.csv",
               destfile="~/Downloads/Auto.csv")
 ```
@@ -44,7 +45,7 @@ With the file on your system, you don't need to download it again, so **comment 
 
 Create an object called `auto_file_name` that contains the full path name to the `Auto.data` file on your system.  You can find the full path name by giving the command `file.choose()` in the console (not your solution file) and navigating to the file.  Cut and paste the output of `file.choose()` into your solution file.
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 # Might be different on your system
 auto_file_name <- "~/Downloads/Auto.csv"
 ```
@@ -52,7 +53,7 @@ auto_file_name <- "~/Downloads/Auto.csv"
 ## Task 2
 
 Create an object called `Auto` using the `read.csv()` method at the middle of p. 49
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 Auto <- read.csv(auto_file_name)
 ```
 
@@ -69,7 +70,7 @@ task3 <- summary(Auto$horsepower)
 
 All the data from the book is in the `ISLR` package.  Using the Packages tab in RStudio, install this package.  In your script file, give the command to load the package.
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 library(ISLR)
 ```
 
@@ -80,8 +81,16 @@ Use the indexing operations described in ISL §2.3.3 to create the following obj
 * `task5top` the subset of `Auto` consisting of the first 5 rows in the first 3 columns.
 * `task5bottom` the subset of `Auto` consisting of the last 5 rows in the last 3 columns
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 dim(Auto)
 task5top <- Auto[1:5, 1:3]
 task5bottom <- Auto[393:397, 7:9]
+```
+
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
+cat("# Test statments")
+```
+
+```{r echo=params$show_answers, eval=params$show_answers}
+source("Day-02-Test-Statements.R", local = TRUE)
 ```

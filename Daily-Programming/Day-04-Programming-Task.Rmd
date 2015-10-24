@@ -2,13 +2,14 @@
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Tuesday Sept 15, 2015"
+params: 
+  show_answers: TRUE
 output: 
   rmarkdown::tufte_handout
 ---
 
 ```{r include=FALSE}
 library(scoreActivity)
-show_answers = FALSE
 ```
 
 Today's programming tasks provide an introduction to the basic building blocks of graphics: frames, points, lines, and polygons.  In practice, you'll use higher-level graphics systems such as provided by `lattice`, `ggplot2`, `ggvis` and similar packages.  But you'll understand the use of such packages better if you know the very basics.
@@ -27,7 +28,7 @@ plot(1, xlim = c(0, 100), ylim = c(0,100), type="n")
 
 Create sequences of four values `x1` and `y1` that mark points at the corner of a square.
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 x1 <- c(50, 80, 80, 50)
 y1 <- c(20, 20, 50, 50)
 ```
@@ -35,7 +36,7 @@ Use `lines()` to connect the points in `x1` and `y1`.  Note that `lines()` doesn
 
 Create `x2` and `y2` so that `lines()` will draw all four sides of the square.
 
-```{r echo=show_answers}
+```{r echo=params$params$show_answers}
 # return to the first point at the end!
 x2 <- c(50, 80, 80, 50, 50)
 y2 <- c(20, 20, 50, 50, 20)
@@ -46,7 +47,7 @@ y2 <- c(20, 20, 50, 50, 20)
 
 Create `x3` and `y3` that follow a circular path.^[Back to trigonometry!  Use `seq()` to create a set of `angles` from 0 to $2*pi$.  Then `sin()` and `cos()` can convert the angles to the y-coordinate and x-coordinate respectively.]  Center the circle at $(x=50, y=60)$ and give it a diameter of 40.
 
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 angles <- seq(0, 2 * pi, length = 100)
 x3 <- 50 + 20 * cos(angles)
 y3 <- 60 + 20 * sin(angles)
@@ -55,7 +56,7 @@ y3 <- 60 + 20 * sin(angles)
 ## Task 4
 
 Create `x4` and `y4` to create a figure-8 shaped path. One way to do this is to use statements similar to those for drawing a circle, but vary the radius at each of the `angles` to be proportional to `abs(sin(angles))`.
-```{r echo = show_answers}
+```{r echo = params$show_answers}
 angles <- seq(0, 2 * pi, length = 50 * pi)
 x4 <- 50 + 20 * abs(sin(angles)) * cos(angles)
 y4 <- 50 + 20 * abs(sin(angles)) * sin(angles)
@@ -80,10 +81,10 @@ Use each of these optional arguments to customize a graphic:
 * `xlab = ` and `ylab =` set the x- and y-axis labels repectively
 * `xaxt = ` and `yaxt = ` suppress the axis tick marks when set to the value `"n"`.
 
-```{r echo=FALSE, eval=show_answers, results="asis"}
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
 cat("# Test statments")
 ```
 
-```{r echo=show_answers, eval=show_answers}
-source("Day-04-Test-Statements.R")
+```{r echo=params$show_answers, eval=params$show_answers}
+source("Day-04-Test-Statements.R", local=TRUE)
 ```

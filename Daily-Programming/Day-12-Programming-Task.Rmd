@@ -2,6 +2,8 @@
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Tuesday Oct 13, 2015"
+params: 
+  show_answers: TRUE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -13,8 +15,7 @@ library(ggplot2)
 library(scoreActivity)
 library(ISLR)
 library(scales) # for simple transparency in colors
-show_answers = TRUE
-knitr::opts_chunk$set(tidy=FALSE, echo=show_answers)
+knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
 options(width=100)
 ```
 
@@ -51,7 +52,7 @@ Sim_one <- rbind(Red, Green)
 Sim_two <- rbind(Red, Blue)
 ```
 
-```{r echo=show_answers}
+```{r echo=params$show_answers}
 n_cases <- 10000
 red_mean <- c(1, 0)
 green_mean <- c(0, -1)
@@ -78,10 +79,10 @@ Blue <- data.frame(x = blue[,1], y = blue[,2], class="blue",
 Sim_one <- rbind(Red, Green)
 Sim_two <- rbind(Red, Blue)
 ```
-```{r echo=show_answers, fig.margin=TRUE, eval=show_answers, fig.height=5, fig.width=5,out.width="2.5in"}
+```{r echo=params$show_answers, fig.margin=TRUE, eval=params$show_answers, fig.height=5, fig.width=5,out.width="2.5in"}
 plot(y ~ x, data=Sim_one, col=alpha(Sim_one$class, .02), pch=20)
 ```
-```{r echo=show_answers, fig.margin=TRUE, , fig.height=5, fig.width=5,out.width="2.5in", fig.cap="The two classes of cases, red and blue, in \\texttt{Sim\\_two}."}
+```{r echo=params$show_answers, fig.margin=TRUE, , fig.height=5, fig.width=5,out.width="2.5in", fig.cap="The two classes of cases, red and blue, in \\texttt{Sim\\_two}."}
 plot(y ~ x, data=Sim_two, col=alpha(Sim_two$class, .02), pch=20)
 ```
 
@@ -104,19 +105,19 @@ QDA works in the same way: the function is `qda()`.
 # Confusion matrices
 
 The confusion matrix compares the actual class to the predicted class from the model.  It's straightforward to compute:
-```{r echo=TRUE, eval=show_answers}
+```{r echo=TRUE, eval=params$show_answers}
 table(Sim_one$class, test_LDA_one$class)
 ```
 
 * Compare the confusion matrix from LDA on `Sim_one` to that from QDA on `Sim_one`.^[Use the names `mod_QDA_one` and `test_QDA_one` to store the fitted model and the test results from `predict()` respectively.]  Which one shows better performance?
-```{r echo=show_answers, eval=show_answers}
+```{r echo=params$show_answers, eval=params$show_answers}
 mod_QDA_one <- MASS::qda(class ~ x + y, data = Sim_one)
 test_QDA_one <- predict(mod_QDA_one, newdata = Sim_one)
 table(Sim_one$class, test_QDA_one$class)
 ```
 
 * Fit both LDA and QDA models to `Sim_two`.  Which one performs better?
-```{r echo=show_answers, eval=show_answers}
+```{r echo=params$show_answers, eval=params$show_answers}
 mod_LDA_two <- MASS::lda(class ~ x + y, data = Sim_two)
 mod_QDA_two <- MASS::qda(class ~ x + y, data = Sim_two)
 test_LDA_two <- predict(mod_LDA_two, newdata = Sim_two)
@@ -135,7 +136,7 @@ The difference in performance of LDA and QDA in these examples is not so large t
 
 Calculate the log likelihood for `mod_LDA_one` against the observations `Sim_one$class`.
 
-```{r echo=show_answers, eval=show_answers}
+```{r echo=params$show_answers, eval=params$show_answers}
 likelihoods <-
   with(test_LDA_one, 
        ifelse(class == "red", posterior[,"red"], posterior[,"green"]))
@@ -143,10 +144,10 @@ sum(log(likelihoods))
 ```
 
 
-```{r echo=FALSE, eval=show_answers, results="asis"}
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
 cat("# Test statments")
 ```
 
-```{r echo=show_answers, eval=show_answers}
-source("Day-12-Test-Statements.R")
+```{r echo=params$show_answers, eval=params$show_answers}
+source("Day-12-Test-Statements.R", local=TRUE)
 ```
