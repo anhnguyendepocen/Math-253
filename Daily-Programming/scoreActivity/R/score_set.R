@@ -37,7 +37,7 @@ find_score <- function(test_statements) {
     object_names <- c(object_names, all.names(ldots[k][[1]]$expr))
   }
   object_names <- setdiff(unique(object_names), leave_out_names)
-  missing_names <- object_names[ ! sapply(object_names, FUN=exists)]
+  missing_names <- object_names[ ! sapply(object_names, FUN=exists, inherits=TRUE)]
 
   for (k in seq_along(ldots)) {
     res <- try(lazy_eval(ldots[k])[[1]], silent=TRUE)
@@ -82,7 +82,7 @@ check <- function(match = TRUE, expr, message=NULL, pts=1) {
 #' @export
 check_exists <- function(expr, pts=1) {
   message <- deparse(substitute(expr))
-  value <- exists(message)
+  value <- exists(message, envir = parent.frame())
   list(pts=0 + pts*value,
        message = paste0(ifelse(value, "passed: ", "FAILED: "),
                        'object "',message,'" ',
