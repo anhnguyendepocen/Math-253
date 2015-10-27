@@ -15,8 +15,130 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 Functionals.  How `optim()` allows you to pass the various other arguments, e.g. `data=` to the function being optimized.
 
+The meaning of `...`
+
 Solvers
 
-## Daily activity
+# Bootstrapping
 
-Write a k-fold cross validator.
+
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter5/{5.10}.pdf}
+\marginnote{ISLR Figure 5.10}
+
+In-class demonstration.  How many cases don't get used in a typical resample?
+
+
+
+```{r}
+cases <- 1:10000
+ntrials <- 50
+result <- numeric(ntrials)
+for (k in 1:50) {
+  bootstrap_sample <- sample(cases, size=length(cases), replace = TRUE)
+  result[k] <- length(setdiff(cases, unique(bootstrap_sample))) / length(cases)
+}
+result
+
+## Or ...
+(1 - 1/length(cases))^length(cases)
+```
+
+**Programming a bootstrap calculation**
+
+```{r}
+bootstrap <- function(formula, method, data, statistic, reps=10) {
+  
+  
+}
+```
+
+**Mosaic software**
+
+Using `resample()` and `do()`
+
+
+# Model Selection
+
+Problem: Given a set of potential model terms, choose the best subset.
+
+Two issues:
+
+1. What does "best" mean?
+2. How to optimize?
+
+## Best
+
+In-sample  |  Adjusted   | Out-of-sample
+-----------|-------------|---------------
+$\frac{1}{n}$RSS | $C_p = \frac{1}{n}(\mbox{RSS} + 2 d \hat{\sigma}^2)$       | cross-validated prediction error
+. | $\mbox{AIC} = -2 \ln {\cal L} - 2 d$ | .
+. | $\mbox{AIC}_{ls} = \frac{1}{\hat{\sigma}^2}C_p$ | .
+. | $\mbox{BIC} = \frac{1}{n} (\mbox{RSS} + \ln(n) d \hat{\sigma}^2)$ | .
+R$^2$ | Adjusted R$^2$ | ???
+
+$\mbox{Adjusted R}^2 = 1 - \frac{\mbox{RSS}/(n-d-1)}{\mbox{TSS}{(n-1)}}$
+
+\marginnote{ISLR Figure 6.2.  Note that the values on the vertical axis are the best for that "number of predictors."}
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter6/{6.2}.pdf}
+
+**Uncertainty**
+
+Repeat the analysis for different test sets or using different folds in k-fold cross validation.
+
+* At each value of "Number of Predictors", there will be a distribution.
+* *One-standard-error rule*: select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve.
+
+# Optimization
+
+## What are we optimizing over?
+
+Choose the best set of columns from the model matrix.
+
+```{r}
+Small <- mosaic::sample(mosaicData::KidsFeet, size = 5)
+row.names(Small) <- NULL
+M1 <- model.matrix(width ~ length + sex, data = Small)
+M2 <- model.matrix(width ~ length + sex*biggerfoot, data = Small)
+M3 <- model.matrix(width ~ length*domhand*sex + sex*biggerfoot, data = Small)
+```
+
+Compare ranks.
+
+Use `tmp <- qr(M5)` and `qr.Q(tmp)` and `qr.R(tmp)` to show how to find the smallest matrix of that rank.
+
+## Techniques for optimization
+
+**Exhaustion**
+
+Compare all the $2^d$ possible choices.
+
+**Greedy algorithms**
+
+For term selection ...
+
+- Start with the intercept. At each step, add the single term that most increases the figure of merit.
+- Start with the full model.  At each step, delete the single term that least decreases the figure of merit.
+    
+Two problems:
+
+1. Egg carton problem
+2. Finite step and the gradient not pointing to the top of the mountain.  (Draw a narrow set of nested ellipses.  The steepest direction is orthogonal to the level curves, not likely to be pointing to the top.)
+
+**Not so greedy**
+
+Choose the best model with exactly $d$ vectors.
+
+Increase $d$ upward until the figure of merit gets worse.
+
+Programming:
+```{r}
+combinations(5,3)
+```
+
+# Thursday: Shrinkage methods
+
+# Tuesday: Principal Components
+
+# Daily activity
+
+Write a k-fold cross validator. Day-13-Programming-Tasks
