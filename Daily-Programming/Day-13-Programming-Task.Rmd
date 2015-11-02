@@ -24,7 +24,7 @@ Recall that this involves dividing the available data set into k equal-sized, in
 # A function framework
 
 Call your function `k_fold1()`.  It should have this interface:
-```{r}
+```{r echo=TRUE}
 k_fold1 <- function(formula, method = lm, data = mtcars, predfun = predict, k = 10) {
   # do the calculations
   # producing an estimate of error

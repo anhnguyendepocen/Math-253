@@ -1,0 +1,56 @@
+---
+title: "Class Notes"
+author: "Statistical Computing & Machine Learning"
+date: "Class 17"
+output: rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+require(mosaic)
+require(ISLR)
+knitr::opts_chunk$set(tidy=FALSE)
+```
+
+# Review
+
+Ridge: There's other concerns in addition to fitting, e.g. the size of the coefficients.
+
+Lasso: Do we really need all of those variables?
+
+Revise the picture in $\beta_1$, $\beta_2$ space.  Show an actual trajectory (by fitting a succession of models with different lambdas for both ridge and lasso.)
+
+\marginnote{ISLR Figure 6.4.}
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter6/{6.4}.pdf}
+
+\marginnote{ISLR Figure 6.7.}
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter6/{6.7}.pdf}
+
+# Dimension reduction
+
+Re-arrange the variables to squeeze the juice out of them.
+
+1. Matrix
+2. Approximate matrix in a least squares sense.  If that approximation includes the same column or more, we can discard the repeats.
+2. Outer product 
+3. Rank-1 matrix constructed by creating multiples of one column.
+4. Create another vector and another rank-1 matrix.  Add it up and we get closer to the target.
+
+Creating those singular vectors:
+
+* singular value decomposition
+* ${\mathbf D}$ gives information on how big they are
+* orthogonal to one another
+* cumulative sum of ${\mathbf D}$ components gives the amount of variance in the approximation.
+
+Picture in terms of gaussian cloud.  The covariance matrix tells all that you need.
+
+Not magic.  Show the "envelope" example from Mayo.
+
+Using `pcr()` to fit models, interpreting the output.
+
+# Programming Activity
+
+Day 15 Programming Activity.  Generating data and fitting models.
+
+
+

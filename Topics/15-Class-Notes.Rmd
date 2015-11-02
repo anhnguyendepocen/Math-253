@@ -13,6 +13,26 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 # Programming
 
+* Basic Types
+    - numeric
+    - character
+    - list ... data.frame
+    - matrix
+    - vector
+    - function
+    - formula
+* Flow
+    - functions
+        - return(x)
+        - ...
+    - conditionals
+    - loops
+    - `stop()` exceptions
+    - non-standard evaluation
+        - lazy evaluation
+        - parsing
+        
+
 Functionals.  How `optim()` allows you to pass the various other arguments, e.g. `data=` to the function being optimized.
 
 The meaning of `...`
