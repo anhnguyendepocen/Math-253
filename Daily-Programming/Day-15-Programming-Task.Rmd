@@ -5,8 +5,7 @@ date: "Tuesday Nov 3, 2015"
 params:
   show_answers: FALSE
 output: 
-  rmarkdown::tufte_handout:
-    keep_tex: yes
+  rmarkdown::tufte_handout
 ---
 
 ```{r include=FALSE}

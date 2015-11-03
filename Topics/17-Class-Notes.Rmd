@@ -8,16 +8,49 @@ output: rmarkdown::tufte_handout
 ```{r include=FALSE}
 require(mosaic)
 require(ISLR)
+require(glmnet)
+require(pls)
 knitr::opts_chunk$set(tidy=FALSE)
 ```
 
 # Review
 
+Predicting `Salary` in the `ISLR::Hitters` data:
+
 Ridge: There's other concerns in addition to fitting, e.g. the size of the coefficients.
+
+```{r eval=FALSE}
+Without_NA <- na.omit(ISLR::Hitters)
+inds <- sample(nrow(Without_NA), size = nrow(Without_NA)/2)
+Train <- Without_NA[inds,]
+Test <- Without_NA[-inds,]
+y_all <- Without_NA$Salary
+x_all <- model.matrix(Salary ~ ., data=Without_NA)
+y_train <- Train$Salary
+x_train <- model.matrix(Salary ~ ., data=Train)
+y_test <- Test$Salary
+x_test <- model.matrix(Salary ~ ., data=Test)
+ridge_mod <- cv.glmnet(x_train, y_train, alpha = 0)
+ridge_mod$lambda.min
+ridge_pred <- predict(ridge_mod, s=0, newx = x_test, exact=TRUE)
+mean((ridge_pred - y_test)^2)
+final <- glmnet(x_all, y_all, alpha=0)
+predict(final, type="coefficients", s=ridge_mod$lambda.min)
+
+```
+
+
 
 Lasso: Do we really need all of those variables?
 
-Revise the picture in $\beta_1$, $\beta_2$ space.  Show an actual trajectory (by fitting a succession of models with different lambdas for both ridge and lasso.)
+```{r eval=FALSE}
+lasso_mod <- cv.glmnet(x_train, y_train, alpha = 1)
+lasso_mod$lambda.min
+lasso_pred <- predict(lasso_mod, s=0, newx = x_test, exact=TRUE)
+mean((lasso_pred - y_test)^2)
+final <- glmnet(x_all, y_all, alpha=1)
+predict(final, type="coefficients", s=lasso_mod$lambda.min)
+```
 
 \marginnote{ISLR Figure 6.4.}
 \includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter6/{6.4}.pdf}
@@ -28,7 +61,26 @@ Revise the picture in $\beta_1$, $\beta_2$ space.  Show an actual trajectory (by
 
 # Multi-collinearity
 
-Picture of coefficients from Math 155 book.
+
+The SAT story.
+```{r}
+summary(lm(sat ~ expend, data=mosaicData::SAT))$coef
+summary(lm(sat ~ expend + ratio, data=mosaicData::SAT))$coef
+summary(lm(sat ~ expend + ratio + salary, data=mosaicData::SAT))$coef
+rsquared(lm(expend ~ ratio + salary, data=mosaicData::SAT))
+```
+
+\includegraphics[width=3in]{CI-1.png}
+
+\includegraphics[width=7in]{CI-2.png}
+
+```{r}
+load("../Daily-Programming/mona.rda")
+rankMatrix(mona)
+# pick a vector at random; column 151 versus the first 131 columns
+rsquared(lm(mona[,151] ~ mona[,-(132:191)]))
+```
+
 
 Variance inflation factor
 
@@ -61,13 +113,12 @@ Creating those singular vectors:
 * orthogonal to one another
 * cumulative sum of ${\mathbf D}$ components gives the amount of variance in the approximation.
 ```{r}
-load("../Daily-Programming/mona.rda")
 res <- svd(mona)
 approx <- 0
 for (i in 1:1) {
   approx <- approx + outer(res$u[,i], res$v[,i]) * res$d[i]
 }
-image(approx)
+image(approx, asp=1)
 ```
 
 
@@ -78,6 +129,11 @@ Not magic.  Show the "envelope" example from Mayo.
 
 Using `pcr()` to fit models, interpreting the output.
 
+```{r}
+pcr.fit <- pcr(Salary ~ ., data = ISLR::Hitters, scale=TRUE, validation="CV")
+summary(pcr.fit)
+validationplot(pcr.fit, val.type = "MSEP")
+```
 # Programming Activity
 
 Day 15 Programming Activity.  Generating data and fitting models.
