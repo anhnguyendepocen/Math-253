@@ -25,6 +25,25 @@ Revise the picture in $\beta_1$, $\beta_2$ space.  Show an actual trajectory (by
 \marginnote{ISLR Figure 6.7.}
 \includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter6/{6.7}.pdf}
 
+
+# Multi-collinearity
+
+Picture of coefficients from Math 155 book.
+
+Variance inflation factor
+
+$\mbox{VIF}(\beta_j) = \frac{1}{1 - R^2_{x_j|x_{-j}}}$
+
+Getting rid of vectors that correlate substantially with one another can reduce the variance inflation factor.
+
+## Idea of singular values.
+
+Find orthogonal vectors to describe the ellipsoidal cloud.  The singular value describes "how long" each ellipsoidal axis is.
+
+Correlation $R^2_{x_j | x_{-j}}$ gets increased for each *direction* that overlaps between $x_j$ and $x_{-j}$ --- it doesn't matter how big the singular value is in that direction.  Only by throwing out *directions* can we reduce $R^2_{x_j | x_{-j}}$
+
+
+
 # Dimension reduction
 
 Re-arrange the variables to squeeze the juice out of them.
@@ -41,6 +60,17 @@ Creating those singular vectors:
 * ${\mathbf D}$ gives information on how big they are
 * orthogonal to one another
 * cumulative sum of ${\mathbf D}$ components gives the amount of variance in the approximation.
+```{r}
+load("../Daily-Programming/mona.rda")
+res <- svd(mona)
+approx <- 0
+for (i in 1:1) {
+  approx <- approx + outer(res$u[,i], res$v[,i]) * res$d[i]
+}
+image(approx)
+```
+
+
 
 Picture in terms of gaussian cloud.  The covariance matrix tells all that you need.
 
