@@ -159,7 +159,7 @@ library(pls)
 pcr.fit <- pcr(Y_real ~ X, scale = TRUE, validation="CV") 
 ```
 
-Using `R2(pcr.fit)`, examine the cross-validated $R^2$ as a function of the number of components used.  How many components are needed to get to, say, $R^2 = 0.90$.  
+Using `R2(pcr.fit)`, examine the cross-validated $R^2$ as a function of the number of components used.  How many components are needed to get to, say, $R^2 = 0.85$.  
 
 
 ```{r echo=FALSE, eval=params$show_answers, results="asis"}

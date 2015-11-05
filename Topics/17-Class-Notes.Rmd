@@ -78,7 +78,7 @@ rsquared(lm(expend ~ ratio + salary, data=mosaicData::SAT))
 load("../Daily-Programming/mona.rda")
 rankMatrix(mona)
 # pick a vector at random; column 151 versus the first 131 columns
-rsquared(lm(mona[,151] ~ mona[,-(132:191)]))
+rsquared(lm(t(mona)[,151] ~ t(mona)[,-151]))
 ```
 
 
@@ -115,7 +115,7 @@ Creating those singular vectors:
 ```{r}
 res <- svd(mona)
 approx <- 0
-for (i in 1:1) {
+for (i in 1:15) {
   approx <- approx + outer(res$u[,i], res$v[,i]) * res$d[i]
 }
 image(approx, asp=1)
