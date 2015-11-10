@@ -56,7 +56,7 @@ To add in the $k$ vectors containing $(x - \xi_j)^3_+$, use a loop over each of 
 MM <- cbind(MM, new_vector)
 ```
 
-Package up the computations to create the model matrix into a function `spline_matrix(x, knot_locations)`.
+Package up the computations to create the model matrix into a function `spline_model_matrix(x, knot_locations)`.
 
 ```{r echo = params$show_answers}
 spline_model_matrix <- function(x, knot_locations) {
