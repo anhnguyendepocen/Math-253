@@ -39,7 +39,7 @@ This is a data table about the expression of 12 genes and their possible relatio
 # Comparing OLS to ridge
 
 Write a function with this interface:
-```{r}
+```{r echo=TRUE}
 compare_ols_ridge <- function(response, predictors, lambda=1){
   # your statements will go here
 }

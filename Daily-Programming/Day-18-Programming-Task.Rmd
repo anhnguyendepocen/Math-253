@@ -1,0 +1,130 @@
+---
+title: "In-Class Computing Task 18"
+author: "Math 253: Statistical Computing & Machine Learning"
+date: "Thesday Nov 24, 2015"
+params:
+  show_answers: FALSE
+output: 
+  rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+library(e1071)
+options(width=80)
+knitr::opts_chunk$set(tidy=FALSE)
+```
+
+In this activity, you're going to create some simple, simulated classification data to explore the performance of support vector machines.
+
+# Generate some simulated data
+
+
+To start, set the seed of the random number generator to some constant value.  This enables you to repeat exactly the calculations even though random numbers are being used.
+
+```{r}
+set.seed(101)
+```
+
+1. Create two constants
+```{r}
+n_cases <- 100
+n_predictors <- 2
+```
+
+2. Generate a matrix `X` of i.i.d. N(0, 1) random numbers with `n_cases` rows and `n_predictors` columns. 
+
+```{r echo = params$show_answers}
+X <- matrix(rnorm(n_cases * n_predictors), ncol = n_predictors)
+```
+
+3. Generate a vector `y` of an even number of ones and minus-ones.
+```{r}
+y <- rep(c(-1, 1), length.out = n_cases)
+```
+
+4. You're going to modify `X` so that cases with $y=1$ get moved north-east and cases with $y = -1$ get moved south-west:
+```{r}
+Movement <- matrix(y, ncol = n_predictors, nrow = length(y), byrow = FALSE)
+```
+
+You will be adding `Movement` to `X` to produce the actual predictor variables.
+
+5. Package up `y` and the predictors into a data frame (as required by the fitting function `svm()`.)
+
+```{r}
+offset <- 5
+D <- data.frame(x = X + offset * Movement, y = as.factor(y))
+```
+
+\enlargethispage{1.5in}
+
+The multiplier, `offset`, sets how far the clouds for the different classes are apart from one another.  Take a look:
+
+```{r eval = params$show_answers}
+plot(x.1 ~ x.2, data = D, col = D$y)
+```
+
+
+# Fit the support vector classifier
+
+The `svm()` function from the `e1071` package carries out the optimization to create the support vector machine.
+
+```{r}
+library(e1071)
+classifier_1 <- svm(y ~ ., data = D, kernel = "linear", cost = 1, scale = FALSE)
+```
+
+\newpage
+
+# Performance and visualization
+
+Calculate the classification confusion matrix like this:
+
+```{r eval = params$show_answers}
+vals <- predict(classifier_1)
+table(D$y, vals)
+```
+
+To help visualize the SVM, you can plot out the cases and the support vector machine.  Only two of the predictor variables can be shown.
+
+```{r eval=params$show_answers}
+plot(classifier_1, x.1 ~ x.2, data = D)
+```
+
+The support vectors are denoted by x.  The class is denoted by color.  The decision boundary is given by the color boundary (which will run diagonally in this case).
+
+
+# Support vectors, the boundary hyperplace, and the cost
+
+Make sure you understand how the boundary is related to the support vectors and how the *margin* is being indicated in the graph.
+
+Lower the cost used in the optimization.  How does the margin and the number of support vectors change as the cost gets lower?
+
+# Overlap between classes
+
+Change the `offset` to 2, fit the SVM and visualize.  Are there any cases on the wrong side of the boundary?
+
+Try even smaller `offset`s.  Explore what happens to the boundary and margins as the cost used in the optimization changes.
+
+\enlargethispage{1in}
+
+# What if there is no distinction between classes?
+
+Set `offset <- 0`.  Now the predictors have the same distribution for both classes. Given this, what do you think the (out-of-sample) confusion matrix should be?
+
+
+Fit the SVM model and let's find out! Start with a cost of 10. 
+
+```{r echo= params$show_answers, eval=params$show_answers}
+X2 <- matrix(rnorm(n_cases * n_predictors), ncol = 2)
+D2 <- data.frame( x = X2, y = as.factor(y))
+classifier_2 <- svm(y ~ ., data = D2, kernel = "linear", cost = 10, scale = FALSE)
+table(y, predict(classifier_2))
+```
+
+What do you think the (out-of-sample) confusion matrix would be?
+
+# Over-fitting
+
+Change the number of predictors, `n_predictors`, to 10.  Build the SVM and calculate the confusion matrix.  What's the sign that the model is being over-fit?
+

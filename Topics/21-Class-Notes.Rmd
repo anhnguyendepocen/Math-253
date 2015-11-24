@@ -1,0 +1,58 @@
+---
+title: "Class Notes"
+author: "Statistical Computing & Machine Learning"
+date: "Class 21"
+output: rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+require(mosaic)
+require(ISLR)
+require(glmnet)
+require(pls)
+require(gam)
+knitr::opts_chunk$set(tidy=FALSE)
+```
+
+# Kaggle
+
+Create an account for yourself.
+
+There are more than 100 public competitions. Choose one that's appealing to you.  Note: the web interface isn't very good.
+
+
+
+## Rossman Store Data
+
+```{r}
+Rossman_train = read.csv("../Kaggle/Rossman-Store-Sales/train.csv")
+Stores = read.csv("../Kaggle/Rossman-Store-Sales/store.csv")
+```
+
+## Winton Stock Market 
+
+[project description](https://www.kaggle.com/c/the-winton-stock-market-challenge/data)
+
+## Homesite
+
+[project description](https://www.kaggle.com/c/homesite-quote-conversion/data)
+
+```{r}
+Homesite_train <- read.csv("../Kaggle/Homesite-Home-Insurance/train.csv")
+```
+
+## Walmart
+
+[project description](https://www.kaggle.com/c/walmart-recruiting-trip-type-classification)
+
+```{r}
+Walmart_train <- read.csv("../Kaggle/Walmart/train.csv")
+```
+
+## Digit Recognition
+
+[project description](https://www.kaggle.com/c/digit-recognizer/data)
+
+## Probably not within our techniques
+
+[EEG and lift detection](https://www.kaggle.com/c/grasp-and-lift-eeg-detection/data)

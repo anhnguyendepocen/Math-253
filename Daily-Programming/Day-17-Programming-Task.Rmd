@@ -92,7 +92,7 @@ predict(ctree_pure, newdata = data.frame(x = 7))
 
 # Deviance of each node
 
-The printed version of the tree gives the deviance of each node.  For both `ctree_pure` and `rtree_pure`, annotate the graph of the tree with the deviance of each node.
+The printed version of the tree gives the deviance of each node.  For both `ctree_pure` and `rtree_pure`, annotate the graph of the tree (printed on page 1) with the deviance of each node.
 
 Then, label each split according to how much deviance it eliminates.  This is the difference between the deviance at the node and the sum of the deviances of the two sub-nodes. 
 
@@ -119,7 +119,7 @@ rtree_5 <- prune.tree(rtree_pure, best = 5)
 ctree_2 <- prune.misclass(ctree_pure, best = 2)
 ```
 
-* Create a vector `nterminal` that is `1:8`
+* Create a vector `nterminal` that is `2:8`
 * Create a vector `tree_deviance` that holds the deviance of the regression tree for each value of `nterminal`.
 
 # Building a real classifier
