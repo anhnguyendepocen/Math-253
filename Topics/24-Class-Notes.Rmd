@@ -1,0 +1,131 @@
+---
+title: "Class Notes"
+author: "Statistical Computing & Machine Learning"
+date: "Class 24"
+output: rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+require(mosaic)
+require(ISLR)
+require(DataComputing)
+library(mixtools)
+library(ggplot2)
+knitr::opts_chunk$set(tidy=FALSE, fig.width=6, fig.height=4, out.width="5in")
+```
+
+# Unsupervised Learning
+
+There's no response variable to be predicted.  Instead, the analyst seeks to find useful structure in the cloud of data. Of course, what's useful depends on what the analyst wants to do with the results.
+
+## Example: Detecting abnormal heart beats.
+
+A shape that's normal in one person may be abnormal in another.
+
+![PVC triplet](http://3.bp.blogspot.com/-kUwO1k63R3w/UFurvD1y0TI/AAAAAAAAKN0/gJUM2aWbv8c/s1600/NSR+with+a+triplet+of+PVCs.jpg)
+
+![Same or different?](http://1.bp.blogspot.com/-mIu0CXKcEnw/Ts9uI0r8tXI/AAAAAAAAFzw/Er6PqLHw_nM/s640/NSR+with+multifocal+PVCs+04.jpg)
+
+![VT](http://www.ecgconsult.co.uk/0804/NSVT1/HLa.jpg)
+
+# K-means clustering
+
+```{r}
+data(faithful)
+hist(faithful$waiting, 
+     main="Time between Old Faithful eruptions",
+     xlab="Minutes")
+```
+
+```{r}
+x <- faithful$waiting
+km.out <- kmeans(x, 5)
+hist(x)
+points(jitter(x), jitter(0*x + 1), col=km.out$cluster)
+```
+
+```{r}
+x <- as.matrix(faithful)
+km.out <- kmeans(x, 3, nstart=20)
+plot(x, col=(km.out$cluster +1), pch=20)
+```
+
+## Rescaling variables
+```{r}
+for (k in 1:2)
+  x[,k] <- (x[,k] - mean(x[,k]))/sd(x[,k])
+km.out <- kmeans(x, 3)
+plot(x[,1], x[,2], col=(km.out$cluster +1), pch=20)
+```
+
+```{r}
+x <- as.matrix(WorldCities[,4:3])
+km.out <- kmeans(x, 7, nstart=20)
+ggplot(WorldCities, 
+       aes(x = longitude,y=latitude)) +
+  geom_point(alpha=0.1, 
+             aes(color=as.factor(km.out$cluster))) +
+  scale_color_discrete(guide=FALSE)
+```
+
+Objective function: The sum of distances from each point to the centroid of its cluster.
+
+Math notation exercise: take this apart and explain it
+
+$$\stackrel{\mbox{minimize}}{C_1, \ldots, C_K} \left\{
+\sum_{k=1}^K \frac{1}{|C_k|} \sum_{i, i' \in C_k} 
+\sum_{j=1}^p (x_{ij} - x_{i'j})^2 \right\}$$
+
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter10/{10.7}.pdf}
+\marginnote[-2cm]{Figure 10.7 from ISL}
+
+# Mixture Models
+
+See [mixtools package](ftp://www.r-project.org/pub/R/web/packages/mixtools/vignettes/mixtools.pdf)
+
+
+
+Work through the following for different values of `maxit` to show how the calculations are done.
+```{r}
+library(mixtools)
+wait_mix <- normalmixEM(faithful$waiting, lambda = .5, 
+                     mu = c(90, 50, 70), sigma = c(2,1,10), 
+                     maxit = 15)
+plot(wait_mix$x, wait_mix$posterior[,1], ylim=c(0,1))
+points(wait_mix$x, wait_mix$posterior[,2], col="red")
+points(wait_mix$x, wait_mix$posterior[,3], col="green")
+rug(jitter(wait_mix$x))
+```
+
+```{r}
+plot(wait_mix, density=TRUE, whichplots = 2,
+     cex.axis=1.4, cex.lab=1.4, cex.main=1.8,
+     main2="Time between Old Faithful eruptions",
+     xlab2="Minutes")
+```
+
+```{r cache=TRUE}
+set.seed(101)
+mix2 <- mvnormalmixEM(as.matrix(faithful), k=3)
+plot(mix2, whichplots=2)
+```
+
+## EM Algorithm
+
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter10/{10.6}.pdf}
+\marginnote[-2cm]{Figure 10.6 from ISL}
+
+1. Start with a guess for probability model:
+    * $\phi_j^{(0)}(x)$ distribution of component $j$
+    * $\lambda_j^{(0)}$ how "important" is each component
+    
+2. **E-step**
+    Calculate probability for each case $i$ being in component $j$ given the probability model.
+    $$p_{ij}^{(t)} = \frac{\lambda_j^{(t)} \phi_j^{(t)}({\mathbf{x}_i)}}{\sum_{j' = 1}^m \lambda_{j'}^{(t)} \phi_{j'}^{(t)}({\mathbf{x}_i)}}$$
+    
+3. **M-step**
+    Update probability model based on $p_{ij}^{(t)}$
+    * $$\lambda_j^{(t+1)} = \frac{1}{n} \sum_{i=1}^n p_{ij}^{(t)}$$
+    * Re-estimate parameters of $\phi_j^{(t+1)}$, e.g. the mean and convariance matrix.
+    
+For mixture models, see [mixtools package](ftp://www.r-project.org/pub/R/web/packages/mixtools/vignettes/mixtools.pdf)
