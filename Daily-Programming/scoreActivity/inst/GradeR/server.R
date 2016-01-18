@@ -1,14 +1,9 @@
-
-# This is the server logic for a Shiny web application.
-# You can find out more about building applications with Shiny here:
-#
-# http://shiny.rstudio.com
-#
-
+# An application for viewing and scoring RMD/HTML/R files
 library(shiny)
 library(shinyFiles)
 
 State <- reactiveValues()
+Where <- reactiveValues()
 
 shinyServer(function(input, output, session) {
 
@@ -16,8 +11,12 @@ shinyServer(function(input, output, session) {
   State$the_directory <- "~/Downloads/Math-253-Student-Papers/253-Week-6-Assignment" # dirname(file.choose())
   
   observe({
+    if (input$get_dir == 0 ) return()
     cat("Directory button value ", input$get_dir, "\n")
-    setup_score_data_frame()
+    dir_name <- dirname(file.choose())
+#    browser()
+    isolate(State$the_directory <<- dir_name) # Where$directory <<- dir_name
+    isolate(setup_score_data_frame())
   })
   
   # update the list of students, displaying their current scores
@@ -36,7 +35,7 @@ shinyServer(function(input, output, session) {
   
   # Initialize scores data frame 
   setup_score_data_frame <- reactive({
-    input$get_dir # for the dependency
+    # input$get_dir # for the dependency
     score_format <- data.frame(student = " ", score = 0, 
                              file = 0, time = date(), 
                              comment = "",
@@ -127,22 +126,34 @@ shinyServer(function(input, output, session) {
       
   display_student_file <- reactive({ 
       file_name <- get_file_to_display()
-      contents <- readLines(file_name)
       file_type <- tolower(tools::file_ext(file_name))
+      if (file_type == "pdf") {
+        system(paste0("open '", file_name, "'"))
+        return()
+      }
+      if (file_type == "zip") {
+        warning("ZIP file encountered")
+        return()
+      }
+      con <- file(file_name, open = "rt", raw = TRUE)
+      contents <- readLines(con)
+      close(con)
+    
       html_contents <- rmd_contents <- r_contents <- "" # display nothing
       if (file_type == "html") {
         html_contents <- contents
+        output$html_display <- renderText(HTML(html_contents))
         tab_to_show <- "HTML"
       } else if (file_type == "r") {
         r_contents <- contents
+        output$r_display <- renderText(paste(r_contents, collapse = "\n"))
         tab_to_show <- "R"
       } else if (file_type == "rmd") {
         rmd_contents <- contents
+        output$rmd_display <- renderText(paste(rmd_contents, collapse = "\n"))
         tab_to_show <- "RMD"
       }
-      output$html_display <- renderText(HTML(html_contents))
-      output$r_display <- renderText(paste(r_contents, collapse = "\n"))
-      output$rmd_display <- renderText(paste(rmd_contents, collapse = "\n"))
+
       updateTabsetPanel(session, "displays", selected = tab_to_show) 
     })
   

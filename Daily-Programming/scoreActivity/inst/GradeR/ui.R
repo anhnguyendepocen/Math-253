@@ -32,7 +32,7 @@ shinyUI(fluidPage(
 
     # Show a plot of the generated distribution
     mainPanel(
-      tabsetPanel(id = "displays", selected = "R",
+      tabsetPanel(id = "displays", selected = "HTML",
                   tabPanel("HTML",
                     wellPanel(id = "html_display",
                               style = "overflow-y:scroll; max-height: 600px",
