@@ -22,7 +22,7 @@ require(mosaic)
         * Caused by too much smoothness
         * Caused by omitting a relevant variable
         * Caused by including an irrelevant variable
-    3. $Var(\hat(f)({\mathbf X}))$ --- how much $\hat{f}$ varies from one possible training set to another.
+    3. $Var(\hat{f}({\mathbf X}))$ --- how much $\hat{f}$ varies from one possible training set to another.
         * Increased by too many degrees of freedom: *overfitting*
         * Increased by collinearity and multi-collinearity.
         * Increased by large $\epsilon$

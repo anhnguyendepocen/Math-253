@@ -1,9 +1,9 @@
 ---
 title: "In-Class Computing Task 8"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Tuesday Sept 29, 2015"
+date: "Estimation and Likelihood"
 params:
-  show_answers: TRUE
+  show_answers: FALSE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -119,7 +119,7 @@ Plot `fare_amount` versus `trip_distance` as a scatter plot.  Then add a line sh
 
 Use your fitted model to estimate the component of each trip's fare that's due to standing-still time.
 
-```{r echo=params$show_answers, eval=params$show_answers}
+```{r echo=params$show_answers, eval=params$show_answers, warning=FALSE}
 plot(fare_amount ~ trip_distance, data = Taxi_trips, pch=20, alpha=.2)
 abline(best$par[1], best$par[2], col="red", lwd=3)
 ```

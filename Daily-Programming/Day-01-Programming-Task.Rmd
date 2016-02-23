@@ -1,9 +1,9 @@
 ---
-title: "In-Class Computing Task"
+title: "In-Class Computing Task 1"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Thursday Sept 3, 2015"
+date: "Thursday January 21, 2016"
 params:
-  show_answers: TRUE
+  show_answers: FALSE
 output: rmarkdown::tufte_handout
 
 ---
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
 
 This is the first in-class computing task for the course.  These instructions apply to this and future computing tasks.
 
-1. You'll construct your answers in an `.R` script file. It's best if you name today's file `2015-09-03-inclass.R` and future files in the same pattern.  That will help you find your own files. 
+1. You'll construct your answers in an `.R` script file. It's best if you name today's file `Day-01-activity.R` and future files in the same pattern.  That will help you find your own files. 
 #. The script file **must** run to completion when you "source" it.
 
     If there are parts of your script that are incomplete, comment them out to produce a file that does run to completion while preserving your incomplete work as comments.
@@ -44,7 +44,7 @@ You may find that `mosaicData` is not yet installed on your R system.  If not, u
 ## Task 2
 
 Create an object named `task2` that contains a character string like
-`r paste("Today is", date())`.  Your command should be such as to create a string with the correct date on any day in the future that the script will be evaluated.
+"`r paste("Today is", date())`".  Your command should be such as to create a string with the correct date on any day in the future that the script will be evaluated.
 
 ```{r echo=params$show_answers}
 task2 <- paste("Today is", date())

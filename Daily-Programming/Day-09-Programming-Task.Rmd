@@ -1,9 +1,9 @@
 ---
 title: "In-Class Computing Task 9"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Thursday Oct 1, 2015"
+date: "Tuesday Feb 23, 2016"
 params:
-  show_answers: TRUE
+  show_answers: FALSE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -62,7 +62,7 @@ Here's how to make such a deck:
 ```{r}
 poker_deck <- c(outer((10 * 2:14), 1:4, '+'))
 ```
-The `outer()` function takes two vectors and an operation. The operations is applied to every possible pair of an element from the first vector and an element from the second vector.
+The `outer()` function takes two vectors and an operation. The operation is applied to every possible pair of an element from the first vector and an element from the second vector.
 
 ## Calculating suits and ranks
 
@@ -142,10 +142,10 @@ Each should take a 5-card hand and return `TRUE` or `FALSE` depending whether th
 * `min(ranks(five_cards)) == 10`
 * and so on. 
 
-You will also find the `&` function useful, as in this test for a full house.^[There are two similar functions, `&` and `&&`. Use `&` when you want to compare vectors of any length.  You can use `&&` when combining vectors of length 1. `&&` (and its cousin `||`) doesn't evaluate additional conditions once it knows what the result will be.]
+You will also find the `&&` function useful, as in this test for a full house.^[There are two similar functions, `&` and `&&`. Use `&` when you want to compare vectors of any length; it works pairwise on all the elements.  Use `&&` when combining vectors of length 1, as in `if` statements. `&&` (and its cousin `||`) doesn't evaluate additional conditions once it knows what the result will be.]
 ```{r eval=FALSE}
 counts <- table(ranks(five_cards))
-min(counts) == 1 & max(counts) == 2
+min(counts) == 2 && max(counts) == 3
 ```
 
 Make a few test hands with cards of your choosing.  Call these `test_hand_1`, `test_hand_2`, and so on.
@@ -188,6 +188,12 @@ Run your `before_draw()` function many times, collecting the results.  Tabulate 
 ```{r eval=params$show_answers, cache=TRUE}
 table(sapply(1:10000, FUN=before_draw))
 ```
+
+\enlargethispage{1in}
+
+## Just for fun ... Texas Hold'em and Seven Card Stud
+
+Use the functions you've written to produce one that gives the best 5-card hand possible out of 7 cards dealt. 
 
 \newpage
 

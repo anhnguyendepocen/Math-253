@@ -29,13 +29,13 @@ Play this game. Call down 4 contestants.  What's the price of this yacht?
 
 Now, suppose rather than being a strategic game biased toward the last guesser, we wanted to evaluate political prognosticators.  The winner should be the person who makes the best prediction rather than the best guess.
 
-Game: Predict the results of the [recent election in Catalonia](http://www.bbc.com/news/world-europe-34372548), in terms of the number of seats won by parties which campaigned for a mandate for independence. (Actual result: 72/135)  
+Game: Predict the results of the Ukrainian Parliament's [vote of no confidence](http://www.bbc.com/news/world-europe-35591605) in Prime Minister Arseniy Yatsenyuk. How many votes for no confidence were there. \marginnote{(Actual result for you to compare your prediction to: one-hundred ninety-four out of three-hundred thirty-nine.)}
 
 1. Play this game asking people to draw the probability distribution of their prediction.  Who won. How to evaluate the predictions?
 
 2. Suppose you know something about the contestants.    
     * David Moore from International Studies
-    * Tony Dorca from Hispanic Studies
+    * Gary Krueger from Economics
     * Sybill Trelawney from Divination Science
     * Jesse Ventura from Political Science
 

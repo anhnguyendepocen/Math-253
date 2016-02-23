@@ -1,9 +1,9 @@
 ---
-title: "In-Class Computing Task"
+title: "In-Class Computing Task --- Day 3"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Thursday Sept 10, 2015"
+date: "Tues Feb 2, 2016"
 params:
-  show_answers: TRUE
+  show_answers: FALSE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -95,7 +95,19 @@ You might be interested to look at the ratio of `MSE_train` to `MSE_test`.
 MSE_train / MSE_test
 ```
 
-```{r echo=FALSE}
+## Task 7
+
+Add in the test statements: 
+```{r eval = params$show_answers}
+scoreActivity::score253(day = 3)
+```
+  
+```{r echo=FALSE, eval = params$show_answers}
+require(scoreActivity, quietly = TRUE )
+score253(day = 2)
+```
+
+```{r echo=FALSE, eval=FALSE}
 require(scoreActivity, quietly = TRUE )
 source("Day-03-Test-Statements.R", local=TRUE)
 ```

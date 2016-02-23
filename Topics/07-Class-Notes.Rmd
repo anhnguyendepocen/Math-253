@@ -9,9 +9,10 @@ output: rmarkdown::tufte_handout
 require(mosaic)
 ```
 
-# Review
+## Professional contacts
 
-Link to Google doc with professional precis.  I will use this to encourage professionals to consider hiring interns.
+The upcoming AI, Machine learning, and robotics meet up.  Wednesday 24 Feb.
+
 
 ## Coefficients as quantities
 
@@ -20,6 +21,7 @@ Coefficients in linear models are not just numbers, they are physical quantities
 * Dimensions are always (dim of response)/(dim of this term)
 * The model doesn't depend on the units of these quantities.  The units only set the magnitude to the numerical part of the coefficient, but as a quantity a coefficient is the same thing regardless of units.
 * Conversion from one unit to another by multiplying by 1, but expressed in different units, e.g. 60 seconds per minute, 2.2 pounds per kilogram.
+
 # K-nearest neighbors
 
 K-nearest neighbors is a simple, general kind of function-building method.  But some problems:
@@ -78,9 +80,9 @@ Of the 10000 people in the study,
 So, of the 2500 people with ruffled cells, 1800 had malignant tumors. $p( \theta | {\cal O} )$
 
 
-
 # In-class programming activity
 
-Likelihood calculations [link](../Daily-Programming/Day-7-Programming-Task.pdf)
+Introduce exponential probability distribution.  Example: When will the next earthquake happen when the historical record shows a 100-year average time between earthquakes?
+ [link to day 7 activity](../Daily-Programming/Day-7-Programming-Task.pdf)
 
 
