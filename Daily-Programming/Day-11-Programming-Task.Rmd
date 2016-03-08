@@ -21,7 +21,7 @@ options(width=100)
 \marginnote{This programming task has been modified from the original. Consequently, the test statements have changed.  If you are working with this file, use the following command to run the tests:\\ 
 \texttt{\noindent{}require(scoreActivity,\\
 \hspace*{.35in} quietly = TRUE )\\
-score253(day = 113)
+score253(day = 11.1)
 }
 }
 

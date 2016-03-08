@@ -1,5 +1,5 @@
 ---
-title: "In-Class Computing Task"
+title: "In-Class Computing Task: Day 12"
 author: "Math 253: Statistical Computing & Machine Learning"
 date: "Thursday March 3, 2016"
 params: 
