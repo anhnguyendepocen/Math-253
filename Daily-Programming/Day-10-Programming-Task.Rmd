@@ -1,9 +1,9 @@
 ---
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Tuesday Oct 5, 2015"
+date: "Thursday Feb. 25, 2016"
 params:
-  show_answers: TRUE
+  show_answers: FALSE
 output: 
   rmarkdown::tufte_handout
 ---

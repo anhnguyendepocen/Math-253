@@ -1,9 +1,9 @@
 ---
-title: "In-Class Computing Task"
+title: "In-Class Computing Task --- Day 11"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Thursday Oct 8, 2015"
+date: "Tuesday March 1, 2016"
 params: 
-  show_answers: TRUE
+  show_answers: FALSE
 output: 
   rmarkdown::tufte_handout
 ---
@@ -18,9 +18,16 @@ knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
 options(width=100)
 ```
 
+\marginnote{This programming task has been modified from the original. Consequently, the test statements have changed.  If you are working with this file, use the following command to run the tests:\\ 
+\texttt{\noindent{}require(scoreActivity,\\
+\hspace*{.35in} quietly = TRUE )\\
+score253(day = 113)
+}
+}
+
 This activity involves *correlated* random variables.  You're going to see how to describe simple correlations between variables, how to generate correlated variables, and the meaning and interpretation of the ${\mathbf \Sigma}^{-1}$ in the hard-to-understand Equation 4.18 from ISL:
 
-$$f(x) = \frac{1}{(2\pi)^{p/2} | {\mathbf \Sigma}|^{1/2}} \exp\left(-\frac{1}{2}(x-\mu)^T {\mathbf \Sigma}^{-1} (x - \mu)\right) .$$
+$$f(x) = \frac{1}{(2\pi)^{p/2} | {\mathbf \Sigma}|^{p/2}} \exp\left(-\frac{1}{2}(x-\mu)^T {\mathbf \Sigma}^{-1} (x - \mu)\right) .$$
 
 # Correlation and Covariance
 
@@ -42,26 +49,26 @@ The *covariance matrix* is ${\mathbf \Sigma}_{ij} \defeq  \mbox{cov}({\mathbf X}
 Consider this covariance matrix:
 
 
-$${\mathbf A} \defeq \left[ \begin{array}{rr}
+$${\mathbf \Sigma} \defeq \left[ \begin{array}{rr}
 1.0 & -0.7\\
 -0.7 & 1.0\\ 
 \end{array} \right]$$
 
-* Create a matrix object `A` to represent ${\mathbf A}$
+* Create a matrix object `Sigma` to represent ${\mathbf \Sigma}$
 
 ```{r echo=params$show_answers}
-A <- matrix(c(1, -0.7, -0.7, 1), nrow=2, ncol=2)
+Sigma <- matrix(c(1, -0.7, -0.7, 1), nrow=2, ncol=2)
 ```
 
-* Create a matrix object `A_inv` holding the inverse ${\mathbf A}^{-1}$.  (*Hint*: See `solve()`.)
+* Create a matrix object `Sigma_inv` holding the inverse ${\mathbf \Sigma}^{-1}$.  (*Hint*: See `solve()`.)
 
 ```{r echo=params$show_answers}
-A_inv <- solve(A)
+Sigma_inv <- solve(Sigma)
 ```
 
-You can construct the matrix product ${\mathbf A}{\mathbf A}^{-1}$ using the matrix multiplication operator `%*%` in R.
+You can construct the matrix product ${\mathbf \Sigma}{\mathbf \Sigma}^{-1}$ using the matrix multiplication operator `%*%` in R.
 
-* Create a matrix object `test_inverse` that holds the product of `A` and `Ainv`.
+* Create a matrix object `test_inverse` that holds the product of `Sigma` and `Sigma_inv`.
 
 # Matrix Compositions
 
@@ -69,23 +76,23 @@ A major technique for working with matrices is to *factor* them.  Factoring a ma
 
 For matrices that are symmetrical^[And positive definite, but never mind that for now since all covariance matrices are positive definite], an important factorization is called the *Cholesky decomposition*.  (Sometimes this is called the "square root" of a matrix.) You can calculate the Cholesky decomposition using the `chol()` function in R.
 
-* Create a matrix `A_chol` which is the Cholesky decomposition of A.
+* Create a matrix `A` which is the Cholesky decomposition of ${\mathbf \Sigma}$.
 
 ```{r echo=params$show_answers}
-A_chol <- chol(A)
+A <- chol(Sigma)
 ```
 
 The result of `chol()` is a single upper triangular matrix. 
 
-The *transpose* of a matrix is simply a flip around the diagonal.  In R, this is accomplished with the `t()` function. Calculate `t(A_chol)` and confirm that it is a *lower* triangular matrix.
+The *transpose* of a matrix is simply a flip around the diagonal.  In R, this is accomplished with the `t()` function. Calculate `t(A)` and confirm that it is a *lower* triangular matrix.
 
-Verify that the matrix product of `t(A_chol)` and `A_chol` is equivalent to A.
+Verify that the matrix product of `t(A)` and `A` is equivalent to A.
 
 # Orthogonal vectors and matrices
 
 In previous work, you've generated random vectors.  
 
-* To start, make two vectors `x1` and `x2` of length 10 using `rnorm(10)`.  The mean of a vector generated in this way is usually close to zero. (The standard error of the mean is $1/sqrt{n}$, where $n$ is the length of the vector.)
+* To start, make two vectors `x1` and `x2` of length 10 using `rnorm(10)`.  The mean of a vector generated in this way is usually close to zero. (The standard error of the mean is $1/\sqrt{n}$, where $n$ is the length of the vector.)
 
 ```{r echo=params$show_answers}
 x1 <- rnorm(10)
@@ -120,35 +127,35 @@ Note that the covariance matrix is very close to being diagonal.  The is because
 
 It's easy to generate sets of uncorrelated random vectors, such as `X` or `W`.  Now you're going to modify `X` to produce a new matrix with covariance $A$ (from the first section).
 
-* Create matrix `A_inv_chol` which is the Cholesky decomposition of the inverse of A. (Note that `A_inv_chol` is meant to imply "Take the inverse of A, and then the Cholesky decomposition of that.")
+* Create matrix `A_inv` which is the Cholesky decomposition of the inverse of ${\mathbf \Sigma}$. (Note that `A_inv` is meant to imply "Take the inverse of ${\mathbf \Sigma}$, and then the Cholesky decomposition of that.")
 ```{r echo=params$show_answers}
-A_inv_chol <- chol(solve(A))
+A_inv <- chol(solve(Sigma))
 ```
 
-* Multiply `X` by `A_chol`.  The result --- call it `Y` --- should be a matrix of the same dimensions as `X`.
+* Multiply `X` by `A`.  The result --- call it `Y` --- should be a matrix of the same dimensions as `X`.
 
 ```{r echo=params$show_answers}
-Y <- X %*% A_chol
+Y <- X %*% A
 ```
 
-The covariance matrix of `Y` should be similar to `A`, but `Y` is so short that there will be lots of random fluctuations.
+The covariance matrix of `Y` should be similar to `Sigma`, but `Y` is so short that there will be lots of random fluctuations.
 
 ```{r echo=params$show_answers, eval=params$show_answers}
 t(Y) %*% Y / nrow(Y)
 ```
 
-* Resassign `Y` to be the product of `W` times `A_chol`.  This will give you 10,000 random samples with a covariance matrix close to `A`.  
+* Resassign `Y` to be the product of `W` times `A`.  This will give you 10,000 random samples with a covariance matrix close to `A`.  
 
-Check whether the covariance matrix of this new, bigger `Y` is close to `A`.  The difference between `A` and the covariance matrix of `Y` should be similar in size to $1/\sqrt{n}$.  Is it?
+Check whether the covariance matrix of this new, bigger `Y` is close to `Sigma`.  The difference between `Sigma` and the covariance matrix of `Y` should be similar in size to $1/\sqrt{n}$.  Is it?
 
 ```{r echo=params$show_answers, eval=params$show_answers}
-Y <- W %*% A_chol
+Y <- W %*% A
 t(Y) %*% Y / nrow(Y)
 ```
 
 \enlargethispage{1in}
 
-* Finally, plot out the first column of `Y` against the second column.  (Recall that the index brackets work as `[rows, cols]` and leaving an element blank means "all of them.")  Your graph will give a picture of the multivariate Gaussian distribution with covariance `A`
+* Finally, plot out the first column of `Y` against the second column.  (Recall that the index brackets work as `[rows, cols]` and leaving an element blank means "all of them.")  Your graph will give a picture of the multivariate Gaussian distribution with covariance `A`.
 
 
 It's helpful to set at a low value the transparency of the of the points.  This lets you see more detail of the dense part of the distribution. Try `col = rgb(0, 0, 0, .05)`.
