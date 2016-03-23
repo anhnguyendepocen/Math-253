@@ -34,7 +34,7 @@ y1 <- c(20, 20, 50, 50)
 ```
 Use `lines()` to connect the points in `x1` and `y1`.  Note that `lines()` doesn't close the square.
 
-Create `x2_closed` and `y2_closed` so that `lines()` will draw all four sides of the square.
+Create `x2` and `y2` so that `lines()` will draw all four sides of the square.
 
 ```{r echo=params$show_answers}
 # return to the first point at the end!

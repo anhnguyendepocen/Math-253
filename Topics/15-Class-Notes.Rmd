@@ -11,6 +11,35 @@ require(ISLR)
 knitr::opts_chunk$set(tidy=FALSE)
 ```
 
+# Efron article
+
+Walk through Brad Efron's "Thinking the unthinkable" article. (In `Efron_Bootstrapping_Article.pdf`.)
+
+* On first page, he states that the assumption of a normal distribution is the biggest flaw in a t-test.  But what about covariates?
+* He shows bootstrapping, cross-validation, and LDA.
+
+Re-create the jacknife calculation in a more modern way. See `gtools::combinations(16, 7)` to get all possible combinations of the indicies to fill in the size-7 group.  Then loop over these and to find all the different difference-in-means examples from the data he provided.
+
+We could approximate this by randomization.
+
+Show a bootstrap calculation in `mosaic` form. Example: difference in widths of boys and girls feet.
+
+```{r eval = FALSE}
+require(mosaic)
+lm(width ~ sex, data = KidsFeet)
+trials1 <- do(500) * lm(width ~ sex, data = resample(KidsFeet))
+# discuss the confidence interval on the sexG coefficient
+
+# Show that the result is quite different if length is added as a covariate.
+trials2 <- do(500) * lm(width ~ sex + length, data = resample(KidsFeet))
+
+```
+
+* He doesn't have any code examples.  Why not?
+* He doesn't have any data in machine readable form. Why not?
+
+
+
 # Programming
 
 * Basic Types
@@ -38,6 +67,23 @@ Functionals.  How `optim()` allows you to pass the various other arguments, e.g.
 The meaning of `...`
 
 Solvers
+
+# Communicating with software.
+
+Basic question: what fraction of the original sample is represented in a bootstrap sample.
+
+Work toward developing a complete and effective style of communicating with software.  Work with class to evolve a function:
+
+1. A simple calculation of the fraction of the original contained in a bootstrap sample.  Run this with up arrow several times.
+2. Add a loop --- accumulator, body, package up result.
+3. Encapsulate the code in a function --- give reasonable defaults for the arguments.
+4. Take out the central logic in the loop and implement as a helper function.  Initially, define the helper inside the function.
+5. Add documentation in the form of Roxygen comments
+6. Place this into a package.
+
+End result: something like `bootstrap_fraction.R`.
+
+
 
 # Bootstrapping
 
@@ -152,7 +198,7 @@ Increase $d$ upward until the figure of merit gets worse.
 
 Programming:
 ```{r}
-combinations(5,3)
+gtools::combinations(5,3)
 ```
 
 # Thursday: Shrinkage methods

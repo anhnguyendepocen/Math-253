@@ -1,7 +1,7 @@
 ---
 title: "In-Class Computing Task"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Tuesday Oct 27, 2015"
+date: "Thursday March 10, 2016"
 params:
   show_answers: FALSE
 output: 
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
 options(width=100)
 ```
 
-Today you're going to write a function to carry out k-fold cross validation.
+Today you are going to write a function to carry out k-fold cross validation.
 Recall that this involves dividing the available data set into k equal-sized, independent sets.  For each of the k sets, reserve that set as testing data, fit your model to the remaining data, and evaluate the fitted model on the reserved set.  In doing this, you will accumulate k different estimates of the model error.  Average those to produce an overall estimate of model error.
 
 # A function framework
@@ -36,7 +36,9 @@ As written above, the function does nothing.  You're going to fix that.  But use
 
 # The k sets
 
-The indices of your data are `1:nrow(data)`.  You are to write statements that create a vector `sets` of length `nrow(data)` with the numbers `1:k` repeated.  There are many ways to do this.  Here are two operations, `%%` and `rep(, , each=)` that might be the basis for two different ways of creating the vector Here are two operations that may give you a hint. The example assumes that there are 51 rows in the `data`.
+In k-fold cross validation, you'll divide the cases in your data into k sets. To help do that, you're going to create a vector named `sets` that has one element for each case in the data. The value of that element will be 1 if the corresponding case is to be in set 1 of the k sets, 2 if the case is to be in set 2, and so on.  It doesn't matter how you assign cases to sets, so long as there are k sets of roughly equal size.
+
+There are many ways to construct the vector `sets`.  Here are two operations, `%%` and `rep(, , each=)` that might be the basis for two different ways of creating the vector Here are two operations that may give you a hint. The example assumes that there are 51 rows in the `data`.
 ```{r results="hide", echo=TRUE}
 k <- 10
 sets <- (1:51 %% k) + 1
@@ -46,16 +48,12 @@ sets <- rep(1:k, each = 51/k, length.out = 51)
 
 # The loop
 
-\enlargethispage{1.1in}
-
 Your function will perform the same operation k times.  Doing this will produce k numbers, the mean square prediction error for each of the k test data sets.  In writing a loop, you 
 
 1. Set up the state or "accumulator" that will be updated as you go through the loop
 2. Construct the outline of the loop
 3. Fill in the operations to be carried out inside the loop
 4. Tidy up the accumulator to produce the final result.
-
-\newpage
 
 Here's a code fragment that handles (1), (2), and (4).
 ```{r eval=FALSE, echo=TRUE}
@@ -114,12 +112,10 @@ When you are satisfied that your `k_fold1()` function is working, *copy* the cod
 
 Modify `k_fold()` in the following ways:
 
-\enlargethispage{1.3in}
-
 * Replace `mpg ~ hp + wt + am` with `formula`.  This will allow you to specify the formula on as the first argument.
 * Replace `lm()` with `method()`.  This will allow your function to use modeling types other than `lm()`
 * Replace `predict()` with `predfun()`
-* Replace `[["mpg"]]` with `[[as.character(formula[[2]]) ]]`.^[Indexing formula objects enables extraction of parts of the formula.  For those with an interest in computer languages, a formula can be used as a parse tree, with the operator (e.g. `~` or `+`, etc.) at the top and the arguments underneath.]
+* Replace `[["mpg"]]` with `[[as.character(formula[[2]])]]`.^[Indexing formula objects enables extraction of parts of the formula.  For those with an interest in computer languages, a formula can be used as a parse tree, with the operator (e.g. `~` or `+`, etc.) at the top and the arguments underneath.]
 
 ```{r echo = params$show_answers}
 k_fold <- function(formula, method = lm, data = mtcars, predfun = predict, k = 10) {

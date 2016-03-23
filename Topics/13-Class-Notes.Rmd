@@ -26,7 +26,7 @@ Plotting the decision region for LDA and QDA
 ```{r}
 require(ISLR)
 require(MASS, quietly = TRUE)
-mod1 <- lda(default ~ balance + income, data = Default)
+mod1 <- qda(default ~ balance + income, data = Default)
 # plot(mod1)
 ```
 
