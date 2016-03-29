@@ -22,6 +22,9 @@ Constant will have the least sampling variation but the most bias.
 
 Quadratic will have the least bias but the most sampling variation.
 
+
+For `Credit` dataset: <http://www-bcf.usc.edu/~gareth/ISL/Credit.csv>
+
 ## Shrinkage idea:
 
 Make a linear combination of the constant model with the "full" model.

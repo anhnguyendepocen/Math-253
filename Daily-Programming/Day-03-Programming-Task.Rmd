@@ -9,6 +9,7 @@ output:
 ---
 
 ```{r include=FALSE}
+set.seed(101)
 library(ISLR)
 ```
 
@@ -54,7 +55,7 @@ Test_data <- College[test_indices,]
 
 Using `Train_data`, construct a model of `Yield` as a function of `Top10perc`, `Outstate` (tuition), and  `Expend`. Arrange things so that the name of the object holding the model is `Yield_mod1`.
 
-```{r echo = params$show_answers}
+```{r}
 Yield_mod1 <- lm(Yield ~ Top10perc + Outstate + Expend,
                  data=Train_data)
 ```
@@ -89,9 +90,9 @@ fhat_test <- predict(Yield_mod1, newdata = Test_data)
 MSE_test <- mean((Y_test - fhat_test)^2) 
 ```
 
-You might be interested to look at the ratio of `MSE_train` to `MSE_test`. 
+You might be interested to look at the ratio of `MSE_train` to `MSE_test`. This will be random, but should be close to 1.
 
-```{r echo = params$show_answers}
+```{r echo = params$show_answers, results = "hide"}
 MSE_train / MSE_test
 ```
 

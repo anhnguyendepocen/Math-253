@@ -9,7 +9,7 @@ Test_Statements <- score_set(
   check(TRUE, "For_Testing" %in% all.names(body(k_fold1))),
   check(TRUE, "predfun" %in% all.names(body(k_fold))),
   check(TRUE, "method" %in% all.names(body(k_fold))),
-  check(about(24, pm=4), k_fold(wage ~ age + sex, data=mosaicData::CPS85)),
+  check(about(24, pm=4), k_fold(wage ~ age + sex, data=mosaicData::CPS85, k=10, predfun = predict, method = lm)),
   leave_out_names = c("wage", "age", "sex", "mosaicData")
 )
 print_test_results(Test_Statements)
