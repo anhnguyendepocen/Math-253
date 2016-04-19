@@ -72,7 +72,7 @@ make_polynomial_basis <- function(p) {
 
 ```{r echo=FALSE}
 show_smoother <- function(data = Wage, basis, bootstrap=0, confidence=FALSE, ...){
-  plot(wage ~ age, data=data, pch=20, col=rgb(0,0,0,.05), ...)
+  plot(wage ~ age, data=data, pch=20, col=rgb(0,0,0,.2), ...)
   MM <- make_model_matrix(data$age, basis)
   mod <- lm(data$wage ~ MM - 1)
   x <- seq(0,100, length=1000)
@@ -97,7 +97,8 @@ show_smoother <- function(data = Wage, basis, bootstrap=0, confidence=FALSE, ...
 ```
 
 ```{r}
-show_smoother(basis=make_polynomial_basis(5), data=mosaic::sample(Wage, size=100), bootstrap=10, confidence=TRUE)
+show_smoother(basis=make_polynomial_basis(10),
+              data=mosaic::sample(Wage, size=100), bootstrap=10, confidence=TRUE)
 ```
 
 ## Sigmoidal Functions
@@ -127,7 +128,26 @@ hat_basis <- list(
 ```
 
 ```{r}
-show_smoother(basis=hat_basis, data=mosaic::sample(Wage, size=100), bootstrap=0, confidence=FALSE)
+fourier <- function(fun, period) {
+  function(x) fun(2*pi*x / period)
+}
+fourier_set <- list(
+  function(x) 1,
+#  fourier(cos, 5),
+#  fourier(cos, 10),
+  fourier(cos, 20),
+  fourier(cos, 30),
+#  fourier(sin, 5),
+#  fourier(sin, 10),
+  fourier(sin, 20),
+  fourier(sin, 30))
+show_smoother(basis=fourier_set, data=mosaic::sample(Wage, size=100), bootstrap=20, confidence=TRUE)
+```
+
+
+
+```{r}
+show_smoother(basis=hat_basis, data=mosaic::sample(Wage, size=100), bootstrap=20, confidence=FALSE)
 ```
 
 ## Steps
@@ -149,7 +169,7 @@ show_smoother(basis=step_basis, data=mosaic::sample(Wage, size=100), bootstrap=0
 * triangles
 * gaussian: `dnorm()`
 * sigmoidals: `pnorm()`
-* spline basis: 1, $x$, $x^2$, $x^3$, $(x-\xi_j)_+$
+* spline basis: 1, $x$, $x^2$, $x^3$, $(x-\xi_j)^3_+$
 
 
 

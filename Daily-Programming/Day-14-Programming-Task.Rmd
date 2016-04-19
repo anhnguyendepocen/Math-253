@@ -1,7 +1,7 @@
 ---
 title: "In-Class Computing Task 14"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Thursday Oct 27, 2015"
+date: "Thursday March 24, 2016"
 params:
   show_answers: FALSE
 output: 
@@ -20,7 +20,7 @@ options(width=100)
 
 In this activity, you're going to examine how a shrinkage approach can reduce *out-of-sample* prediction error.
 
-Install the `glmnet` and `ridge` packages.  You need do this only once, so don't put it into your script.  Instead, your script should contain only the commands to load the already installed packages.
+Install the `glmnet` package.^[You need do this only once, so don't put it into your script.  Instead, your script should contain only the commands to load the already installed packages.]
 
 ```{r message = FALSE}
 library(glmnet)
@@ -30,10 +30,12 @@ library(ridge)
 You're going to use the `glmnet()` function to fit ridge regression models.
 The data used in the examples can be loaded with 
 ```{r echo=TRUE}
-data(GenCont)
+GenCont <- read.csv("http://tiny.cc/dcf/GenCont.csv")
 ```
 
-This is a data table about the expression of 12 genes and their possible relationship to the expression of a phenotype. 
+This is a data table about the expression of 12 genes and their possible relationship to the expression of a phenotype. The variable `Phenotypes` will be the response in your model.
+
+\enlargethispage{1in}
 
 
 # Comparing OLS to ridge
@@ -64,12 +66,12 @@ compare_ols_ridge <- function(responses = GenCont[,1],
   pred_train <- predictors[training_inds,]
   resp_test <- responses[-training_inds]
   pred_test <- predictors[-training_inds,]
-  ols_mod <- lm(resp_train ~ pred_train)
-  ridge_mod <- glmnet(pred_train, resp_train, alpha = 0, lambda = lambda)
+  ols_mod <- lm(resp_train ~ as.matrix(pred_train))
+  ridge_mod <- glmnet(as.matrix(pred_train), resp_train, alpha = 0, lambda = lambda)
   ols_in <- mean((resp_train - predict(ols_mod))^2)
   ols_out <- mean((resp_test - predict(ols_mod, newx=pred_test))^2)
-  ridge_in <- mean((resp_train - predict(ridge_mod, newx=pred_train))^2)
-  ridge_out <- mean((resp_test - predict(ridge_mod, newx=pred_test))^2)
+  ridge_in <- mean((resp_train - predict(ridge_mod, newx=as.matrix(pred_train)))^2)
+  ridge_out <- mean((resp_test - predict(ridge_mod, newx=as.matrix(pred_test)))^2)
   
   return(c(lambda = lambda, 
            ols_in = ols_in,     ols_out = ols_out, 
@@ -91,4 +93,8 @@ cat("# Test statments")
 
 ```{r echo=params$show_answers, eval=params$show_answers}
 source("Day-14-Test-Statements.R", local = TRUE)
+```
+
+```{r echo = FALSE, eval = FALSE}
+compare_ols_ridge(GenCont[,1], GenCont[,-1], lambda = 1)
 ```

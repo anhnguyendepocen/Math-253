@@ -16,6 +16,23 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 # Review
 
+Smoothing splines
+
+GAMs --- general additive models.  Give nonlinear terms for any variables of interest.
+
+```{r}
+require(mosaicData)
+require(ggplot2)
+SwimRecords$post_war <- SwimRecords$year > 1945 # for later
+mod <- gam(log(time) ~ sex * bs(year,4) * post_war, data = SwimRecords)
+SwimRecords$preds <- predict(mod)
+ggplot(SwimRecords, aes(x = year, y = preds, color = sex)) + geom_line() + geom_point(aes(y = log(time)))
+```
+
+Change the order of the smothing spline.  Try `ns()` and `bs()`. Add in the `post_war` term.
+
+# Trees and recursive partitioning
+
 We're working on a straightforward framework for regression and classification modeling: tree-based models.
 
 A **branch point** (fork? bifurcation?) divides the data under consideration into two branches based on a single explanatory variable.  The division is chosen, by exhaustion, to decrease the **deviance** of the response variable. For regression, the model is a simple **mean**^[which is itself a maximum-likelihood estimator] and the deviance is equivalent to the **sum of squared residuals**.  For classification, the model is a vector of observed probabilities and the deviance is the **log-likelihood** of the response variable given those probabilities.
@@ -26,6 +43,13 @@ A **branch point** (fork? bifurcation?) divides the data under consideration int
 Branches are followed by additional branch points or by a **single leaf**.  A leaf contains a single case^[or by multiple cases with the same value for the response variable] from the original data (which, by necessity, cannot be further divided into cases). The process of branching is applied **recursively** until there is a leaf for every case in the original data.  I call this a **pure** tree; the log likelihood is as large as possible: 0.
 
 Deviance (which amounts to sum of square residuals in a regression setting), is a value that results from summing over every case.  The data cases and model values leading into each branch point produce a given deviance.  Similarly, each of the branches stemming from the branch point has a deviance. The sum of the branches' deviances is always less than the deviance of the input to the branch point.  That **reduction in deviance** can be ascribed to the variable used in the branch point.  By summing over all the branch points using a particular variable, the total reduction in deviance due to that variable can be calculated.  This can be a useful measure of the **importance** of each variable in contributing to the "explanation" of the response variable.  It's analogous to the sum of squares reported in ANOVA for each model term.  But, unlike ANOVA, there is no fixed order of which term comes first. (This is good in some ways and bad in others.)
+
+## Splitting Criteria for Classification Trees
+
+See p. 312 of the textbook
+
+Note that the Gini index is proportional to the negative log likelihood.  Just multiply the Gini index by the number of cases involved to get the negative log likelihood. I prefer this because it is an [extensive quantity](https://en.wikipedia.org/wiki/Intensive_and_extensive_properties) and so we can consider the whole as the sum of the parts.  Example from physics: temperature is intensive, energy is extensive.
+
 
 \includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter8/{8.9}.pdf}
 \marginnote[-2cm]{Figure 8.9 from ISL}

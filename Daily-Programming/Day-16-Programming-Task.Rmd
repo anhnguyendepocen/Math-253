@@ -1,7 +1,7 @@
 ---
 title: "In-Class Computing Task 16"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Tuesday Nov 3, 2015"
+date: "Thursday March 31, 2016"
 params:
   show_answers: FALSE
 output: 

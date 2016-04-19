@@ -1,7 +1,7 @@
 ---
 title: "In-Class Computing Task 17"
 author: "Math 253: Statistical Computing & Machine Learning"
-date: "Thursday Nov 12, 2015"
+date: "Thursday April 7, 2016"
 params:
   show_answers: FALSE
 output: 
@@ -92,7 +92,7 @@ predict(ctree_pure, newdata = data.frame(x = 7))
 
 # Deviance of each node
 
-The printed version of the tree gives the deviance of each node.  For both `ctree_pure` and `rtree_pure`, annotate the graph of the tree (printed on page 1) with the deviance of each node.
+The printed version (e.g. `print(ctree_pure)`) of the tree gives the deviance of each node.  For both `ctree_pure` and `rtree_pure`, annotate the graph of the tree (printed on page 1) with the deviance of each node. That is, just read the printed report and copy the reported deviances to the to the appropriate node. 
 
 Then, label each split according to how much deviance it eliminates.  This is the difference between the deviance at the node and the sum of the deviances of the two sub-nodes. 
 

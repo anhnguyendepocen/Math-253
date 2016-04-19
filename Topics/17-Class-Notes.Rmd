@@ -88,13 +88,59 @@ $\mbox{VIF}(\beta_j) = \frac{1}{1 - R^2_{x_j|x_{-j}}}$
 
 Getting rid of vectors that correlate substantially with one another can reduce the variance inflation factor.
 
+
+# Creating correlations
+
+Generate points on circles of radius 1, 2, 3, ...
+
+```{r}
+make_circles <- function(radii = 1:2, nangs = 30) {
+  theta = seq(0, 2*pi, length = nangs)
+  x <- rep(cos(theta), length(radii))
+  y <- rep(sin(theta), length(radii))
+  r <- rep(radii, each = nangs)
+  col <- rep(rainbow(nangs), length(radii))
+  data.frame(x = x * r, y = y * r, r = r, col = col)
+}
+transform_circles <- function(M, circles = NULL) {
+  if (is.null(circles)) circles <- make_circles()
+  XY <- rbind(circles$x, circles$y)
+  new <- M %*% XY
+  circles$x = new[1, ]
+  circles$y = new[2, ]
+  
+  circles
+}
+
+
+
+Trans <- matrix(c(1, 2, -3, -1), nrow = 2, byrow = TRUE)
+After_trans <- transform_circles(Trans)
+plot(y ~ x, data = After_trans, col = (After_trans$col), asp = 1, pch = 20)
+
+svals <- svd(Trans)
+Start <- make_circles()
+plot(y ~ x, data = Start, col = Start$col, asp = 1, pch = 20)
+After_V <- transform_circles(t(svals$v), Start)
+plot(y ~ x, data = After_V, col = After_V$col, asp = 1, pch = 20)
+After_V_lambda <- transform_circles(diag(svals$d), After_V)
+plot(y ~ x, data <- After_V_lambda, col = After_V_lambda$col, asp = 1, pch = 20)
+After_V_lambda_U <- transform_circles(svals$u, After_V_lambda)
+plot(y ~ x, data = After_V, col = After_V_lambda_U$col, asp = 1, pch = 20)
+```
+
+
 ## Idea of singular values.
 
 Find orthogonal vectors to describe the ellipsoidal cloud.  The singular value describes "how long" each ellipsoidal axis is.
 
 Correlation $R^2_{x_j | x_{-j}}$ gets increased for each *direction* that overlaps between $x_j$ and $x_{-j}$ --- it doesn't matter how big the singular value is in that direction.  Only by throwing out *directions* can we reduce $R^2_{x_j | x_{-j}}$
 
+Nice illustration:
 
+![](Singular-value-picture.png)
+
+[Source](https://en.wikipedia.org/wiki/Singular_value_decomposition#/media/File:Singular-Value-Decomposition.svg)
 
 # Dimension reduction
 
@@ -115,7 +161,7 @@ Creating those singular vectors:
 ```{r}
 res <- svd(mona)
 approx <- 0
-for (i in 1:15) {
+for (i in 1:20) {
   approx <- approx + outer(res$u[,i], res$v[,i]) * res$d[i]
 }
 image(approx, asp=1)
