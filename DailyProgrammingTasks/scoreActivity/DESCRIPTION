@@ -1,10 +1,12 @@
 Package: scoreActivity
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Runs test statements on the Math 253 in-class programming assignments
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-Depends: lazyeval
+Author: Daniel Kaplan
+Maintainer: <kaplan@macalester.edu>
+Description: Accesses test statements stored on the web and applies them.
+Depends:
+    lazyeval
 License: What license is it under?
 LazyData: TRUE
+RoxygenNote: 5.0.1
