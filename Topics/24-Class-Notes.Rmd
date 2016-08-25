@@ -110,6 +110,12 @@ mix2 <- mvnormalmixEM(as.matrix(faithful), k=3)
 plot(mix2, whichplots=2)
 ```
 
+```{r}
+load("Blood-Cell-data.rda")
+cell_mix <- mvnormalmixEM(as.matrix(Cells1[1:500, 2:3]), k = 5)
+plot(cell_mix, whichplots = 2)
+```
+
 ## EM Algorithm
 
 \includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter10/{10.6}.pdf}

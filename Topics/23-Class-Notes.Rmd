@@ -27,7 +27,7 @@ The methods we have studied so far use *all* the data to fit the model.  But for
     - $\beta_1$ and $\beta_2$ give the partial derivatives w.r.t. $x_1$ and $x_2$.
     - But what if the plane is intended to be parallel to the z-axis? Partials are infinite.
     - We would write the formula with $x_1$ or $x_2$ on the left-hand side.
-    - $0 = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + beta_3 x_3$
+    - $0 = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3$
     - $\beta_0$ sets the distance of the plane from the origin.
     - $\beta_1, \beta_2, ...$ set the orientation of the plane.
 
@@ -111,9 +111,7 @@ FIGURE 9.6. Left: A support vector classifier was fit to a small data set. The h
 
 
 \includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter9/{9.7}.pdf}
-\marginnote[-2cm]{Figure 9.7 from ISL}
-
-FIGURE 9.7. A support vector classifier was fit using four different values of the tuning parameter $C$ in (9.12)–(9.15). The largest value of $C$ was used in the top left panel, and smaller values were used in the top right, bottom left, and bottom right panels. When $C$ is large, then there is a high tolerance for observations being on the wrong side of the margin, and so the margin will be large. As $C$ decreases, the tolerance for observations being on the wrong side of the margin decreases, and the margin narrows.
+\marginnote[-2cm]{Figure 9.7 from ISL. A support vector classifier was fit using four different values of the tuning parameter $C$ in (9.12)–(9.15). The largest value of $C$ was used in the top left panel, and smaller values were used in the top right, bottom left, and bottom right panels. When $C$ is large, then there is a high tolerance for observations being on the wrong side of the margin, and so the margin will be large. As $C$ decreases, the tolerance for observations being on the wrong side of the margin decreases, and the margin narrows.}
 
 ## Nonlinear Boundaries
 
@@ -145,7 +143,8 @@ In a support vector machine, only those cases that are on or across the margin w
 
 The function $< x, x_i >$ could be replaced with any other function of $x$ and $x_i$.  Such functions are called *kernels*.
 
-Explanation of kernels in terms of:
+Explanation of kernels in terms of:    
+
 * high and low-pass filters
 * point-spread functions for images
 
