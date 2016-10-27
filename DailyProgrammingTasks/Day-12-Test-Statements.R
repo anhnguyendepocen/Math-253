@@ -4,7 +4,7 @@ Test_Statements <- score_set(
   check_exists(Green),
   check_exists(Blue),
   check(TRUE, all(names(Red) %in% c("x", "y", "class"))),
-  check(TRUE, all(abs(apply(red, FUN=mean, MARGIN=2)-red_mean) < .5)),
+  check(TRUE, all(abs(apply(Red, FUN=mean, MARGIN=2)-red_mean) < .5)),
   check(TRUE, all(table(Same_sigma$class) == c(n_cases, n_cases))),
   check_exists(mod_LDA_one),
   check_exists(mod_QDA_two),
