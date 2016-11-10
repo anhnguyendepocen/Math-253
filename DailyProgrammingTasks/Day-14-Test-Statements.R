@@ -1,15 +1,15 @@
 library(scoreActivity)
 library(mosaicData)
 Test_Statements <- score_set(
-  check_exists(k_fold1),
-  check_exists(k_fold),
-  check(TRUE, "method" %in% names(formals(k_fold1))),
-  check(TRUE, "data" %in% names(formals(k_fold1))),
-  check(about(8, pm=3), k_fold1(), pts=2),
-  check(TRUE, "For_Testing" %in% all.names(body(k_fold1))),
-  check(TRUE, "predfun" %in% all.names(body(k_fold))),
-  check(TRUE, "method" %in% all.names(body(k_fold))),
-  check(about(24, pm=4), k_fold(wage ~ age + sex, data=mosaicData::CPS85)),
-  leave_out_names = c("wage", "age", "sex", "mosaicData")
+  check_exists(compare_ols_ridge),
+  check_exists(GenCont),
+  check_exists(Shrink_results),
+  check(TRUE, "responses" %in% names(formals(compare_ols_ridge))),
+  check(TRUE, "predictors" %in% names(formals(compare_ols_ridge))),
+  check(TRUE, "lambda" %in% names(formals(compare_ols_ridge))),
+  check(TRUE, "ols_in" %in% names(Shrink_results)),
+  check(TRUE, "ridge_out" %in% names(Shrink_results)),
+  check(about(1, pm = .01), Shrink_results[["lambda"]]),
+  check(about(3.5, pm = 1.5), Shrink_results[["ols_out"]])
 )
 print_test_results(Test_Statements)
